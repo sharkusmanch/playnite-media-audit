@@ -9,38 +9,40 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace MediaTools
+namespace MediaAudit
 {
-    public class MediaToolsPlugin : GenericPlugin
+    public class MediaAuditPlugin : GenericPlugin
     {
         private static readonly ILogger logger = LogManager.GetLogger();
 
         public override Guid Id { get; } = Guid.Parse("2e6b5e8a-c42d-4e5b-9f1a-3d7c8e4a6b2f");
 
-        internal MediaToolsSettings Settings { get; set; }
+        internal MediaAuditSettings Settings { get; set; }
         private Timer _scanTimer;
         private Timer _debounceTimer;
         private readonly object _scanLock = new object();
         private readonly HashSet<Guid> _pendingGameIds = new HashSet<Guid>();
         private readonly object _pendingLock = new object();
 
-        public MediaToolsPlugin(IPlayniteAPI api) : base(api)
+        public MediaAuditPlugin(IPlayniteAPI api) : base(api)
         {
-            Settings = new MediaToolsSettings(this);
+            Settings = new MediaAuditSettings(this);
             Properties = new GenericPluginProperties { HasSettings = true };
         }
 
         public override void OnApplicationStarted(OnApplicationStartedEventArgs args)
         {
-            var interval = TimeSpan.FromMinutes(Settings.ScanIntervalMinutes);
-            _scanTimer = new Timer(_ => RunBackgroundScan(), null, TimeSpan.FromMinutes(1), interval);
+            if (Settings.BackgroundScanEnabled)
+            {
+                var interval = TimeSpan.FromMinutes(Settings.ScanIntervalMinutes);
+                _scanTimer = new Timer(_ => RunBackgroundScan(), null, TimeSpan.FromMinutes(1), interval);
+            }
 
             PlayniteApi.Database.Games.ItemUpdated += OnGamesUpdated;
         }
 
         private void OnGamesUpdated(object sender, ItemUpdatedEventArgs<Game> args)
         {
-            // Only care about media field changes
             var mediaChanged = args.UpdatedItems.Where(u =>
             {
                 var o = u.OldData;
@@ -59,7 +61,6 @@ namespace MediaTools
                     return;
             }
 
-            // Debounce: wait 5 seconds after last change before scanning
             _debounceTimer?.Dispose();
             _debounceTimer = new Timer(_ => FlushPendingGames(), null, TimeSpan.FromSeconds(5), Timeout.InfiniteTimeSpan);
         }
@@ -105,24 +106,26 @@ namespace MediaTools
 
         public override IEnumerable<MainMenuItem> GetMainMenuItems(GetMainMenuItemsArgs args)
         {
+            var menuSection = "@" + ResourceProvider.GetString("LOC_MediaAudit_MenuSection");
+
             yield return new MainMenuItem
             {
-                Description = "Scan All Game Media",
-                MenuSection = "@Media Tools",
+                Description = ResourceProvider.GetString("LOC_MediaAudit_Menu_ScanAll"),
+                MenuSection = menuSection,
                 Action = _ => Task.Run(() => RunManualScan(PlayniteApi.Database.Games.ToList()))
             };
             yield return new MainMenuItem
             {
-                Description = "Scan Selected Games' Media",
-                MenuSection = "@Media Tools",
+                Description = ResourceProvider.GetString("LOC_MediaAudit_Menu_ScanSelected"),
+                MenuSection = menuSection,
                 Action = _ =>
                 {
                     var selected = PlayniteApi.MainView.SelectedGames?.ToList();
                     if (selected == null || selected.Count == 0)
                     {
                         PlayniteApi.Notifications.Add(new NotificationMessage(
-                            "MediaTools_NoSelection",
-                            "Media Tools: No games selected.",
+                            "MediaAudit_NoSelection",
+                            ResourceProvider.GetString("LOC_MediaAudit_Notification_NoSelection"),
                             NotificationType.Info));
                         return;
                     }
@@ -145,15 +148,16 @@ namespace MediaTools
                 var scannedGameIds = PlayniteApi.Database.Games.Select(g => g.Id).ToHashSet();
                 ApplyTags(issues, scannedGameIds);
 
-                if (issues.Count > 0)
+                if (issues.Count > 0 && Settings.ShowScanNotification)
                 {
                     var summary = string.Join(", ",
                         issues.GroupBy(i => i.MediaType)
                               .Select(g => $"{g.Count()} {g.Key}"));
 
                     PlayniteApi.Notifications.Add(new NotificationMessage(
-                        "MediaTools_BackgroundScan",
-                        $"Media Tools: {issues.Count} issues found ({summary}).",
+                        "MediaAudit_BackgroundScan",
+                        string.Format(ResourceProvider.GetString("LOC_MediaAudit_Notification_IssuesFound"),
+                            issues.Count, summary),
                         NotificationType.Info));
                 }
 
@@ -181,8 +185,8 @@ namespace MediaTools
                 if (issues.Count == 0)
                 {
                     PlayniteApi.Notifications.Add(new NotificationMessage(
-                        "MediaTools_ManualScan",
-                        "Media Tools: No issues found.",
+                        "MediaAudit_ManualScan",
+                        ResourceProvider.GetString("LOC_MediaAudit_Notification_NoIssues"),
                         NotificationType.Info));
                 }
                 else
@@ -192,8 +196,9 @@ namespace MediaTools
                               .Select(g => $"{g.Count()} {g.Key}"));
 
                     PlayniteApi.Notifications.Add(new NotificationMessage(
-                        "MediaTools_ManualScan",
-                        $"Media Tools: {issues.Count} issues found ({summary}). Check game tags for details.",
+                        "MediaAudit_ManualScan",
+                        string.Format(ResourceProvider.GetString("LOC_MediaAudit_Notification_IssuesFoundDetail"),
+                            issues.Count, summary),
                         NotificationType.Info));
                 }
             }
@@ -232,7 +237,6 @@ namespace MediaTools
                     tagMap[kvp.Key] = tag;
                 }
 
-                // Group issues by game + media type
                 var issuesByGame = issues
                     .GroupBy(i => i.GameId)
                     .ToDictionary(g => g.Key, g => g.Select(i => i.MediaType).ToHashSet());
@@ -286,7 +290,7 @@ namespace MediaTools
 
         public override UserControl GetSettingsView(bool firstRunSettings)
         {
-            return new MediaToolsSettingsView();
+            return new MediaAuditSettingsView();
         }
     }
 }

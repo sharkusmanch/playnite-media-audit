@@ -6,17 +6,17 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 
-namespace MediaTools
+namespace MediaAudit
 {
     public class MediaScanner
     {
         private static readonly ILogger logger = LogManager.GetLogger();
         private readonly IPlayniteAPI _api;
-        private readonly MediaToolsSettings _settings;
+        private readonly MediaAuditSettings _settings;
         private readonly string _extraMetadataPath;
         private readonly string _playniteSoundPath;
 
-        public MediaScanner(IPlayniteAPI api, MediaToolsSettings settings)
+        public MediaScanner(IPlayniteAPI api, MediaAuditSettings settings)
         {
             _api = api;
             _settings = settings;

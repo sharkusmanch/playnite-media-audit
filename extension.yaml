@@ -1,10 +1,10 @@
-Id: MediaTools_2e6b5e8ac42d4e5b
-Name: Media Tools
-Author: theme
+Id: MediaAudit_2e6b5e8ac42d4e5b
+Name: Media Audit
+Author: sharkusmanch
 Version: 1.0.0
-Module: MediaTools.dll
+Module: MediaAudit.dll
 Icon: icon.png
 Type: GenericPlugin
 Links:
   - Name: GitHub
-    Url: https://github.com/theme/playnite-media-tools
+    Url: https://github.com/sharkusmanch/playnite-media-audit

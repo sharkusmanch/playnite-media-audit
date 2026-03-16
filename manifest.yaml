@@ -1,0 +1,14 @@
+AddonId: MediaAudit_2e6b5e8ac42d4e5b
+Packages:
+  - Version: 1.0.0
+    RequiredApiVersion: 6.11.0
+    ReleaseDate: 2026-03-15
+    PackageUrl: https://github.com/sharkusmanch/playnite-media-audit/releases/download/v1.0.0/MediaAudit_v1.0.0.pext
+    Changelog:
+      - Scan icons, covers, backgrounds for aspect ratio, resolution, and missing media
+      - Extra metadata checks for logos, trailers, microtrailers, and game music
+      - Configurable presets for common standards (Steam, GOG, IGDB, etc.)
+      - Auto-tag games with issues for easy filtering
+      - Background interval scanning with option to disable
+      - Event-driven scanning on media field changes
+      - Manual scan from menu (all games or selected)

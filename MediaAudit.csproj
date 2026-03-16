@@ -2,8 +2,8 @@
   <PropertyGroup>
     <TargetFramework>net462</TargetFramework>
     <LangVersion>latest</LangVersion>
-    <RootNamespace>MediaTools</RootNamespace>
-    <AssemblyName>MediaTools</AssemblyName>
+    <RootNamespace>MediaAudit</RootNamespace>
+    <AssemblyName>MediaAudit</AssemblyName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
@@ -26,5 +26,11 @@
     <None Include="icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Localization/*.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 </Project>

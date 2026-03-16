@@ -12,11 +12,11 @@ tasks:
 
   build:
     cmds:
-    - dotnet build MediaTools.csproj --configuration Release
+    - dotnet build MediaAudit.csproj --configuration Release
 
   format:
     cmds:
-    - dotnet format MediaTools.csproj
+    - dotnet format MediaAudit.csproj
 
   pack:
     deps:

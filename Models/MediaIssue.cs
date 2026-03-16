@@ -1,6 +1,6 @@
 using System;
 
-namespace MediaTools
+namespace MediaAudit
 {
     public enum MediaType
     {

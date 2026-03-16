@@ -1,15 +1,16 @@
 using Playnite.SDK;
 using Playnite.SDK.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace MediaTools
+namespace MediaAudit
 {
-    public class MediaToolsSettings : ISettings, INotifyPropertyChanged
+    public class MediaAuditSettings : ISettings, INotifyPropertyChanged
     {
-        private readonly MediaToolsPlugin _plugin;
-        private MediaToolsSettings _previousSettings;
+        private readonly MediaAuditPlugin _plugin;
+        private MediaAuditSettings _previousSettings;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -19,6 +20,13 @@ namespace MediaTools
         }
 
         // General
+        private bool _backgroundScanEnabled = true;
+        public bool BackgroundScanEnabled
+        {
+            get => _backgroundScanEnabled;
+            set { _backgroundScanEnabled = value; NotifyPropertyChanged(); }
+        }
+
         private int _scanIntervalMinutes = 60;
         public int ScanIntervalMinutes
         {
@@ -31,6 +39,13 @@ namespace MediaTools
         {
             get => _reportMissing;
             set { _reportMissing = value; NotifyPropertyChanged(); }
+        }
+
+        private bool _showScanNotification = true;
+        public bool ShowScanNotification
+        {
+            get => _showScanNotification;
+            set { _showScanNotification = value; NotifyPropertyChanged(); }
         }
 
         private bool _tagUndesiredMedia = true;
@@ -278,22 +293,24 @@ namespace MediaTools
             set { _backgroundMinHeight = value; NotifyPropertyChanged(); }
         }
 
-        public MediaToolsSettings() { }
+        public MediaAuditSettings() { }
 
-        public MediaToolsSettings(MediaToolsPlugin plugin)
+        public MediaAuditSettings(MediaAuditPlugin plugin)
         {
             _plugin = plugin;
-            var saved = plugin.LoadPluginSettings<MediaToolsSettings>();
+            var saved = plugin.LoadPluginSettings<MediaAuditSettings>();
             if (saved != null)
             {
                 CopyFrom(saved);
             }
         }
 
-        private void CopyFrom(MediaToolsSettings source)
+        private void CopyFrom(MediaAuditSettings source)
         {
+            BackgroundScanEnabled = source.BackgroundScanEnabled;
             ScanIntervalMinutes = source.ScanIntervalMinutes;
             ReportMissing = source.ReportMissing;
+            ShowScanNotification = source.ShowScanNotification;
             TagUndesiredMedia = source.TagUndesiredMedia;
             IconTagName = source.IconTagName;
             CoverTagName = source.CoverTagName;
@@ -348,14 +365,14 @@ namespace MediaTools
         public bool VerifySettings(out List<string> errors)
         {
             errors = new List<string>();
-            if (ScanIntervalMinutes < 1)
-                errors.Add("Scan interval must be at least 1 minute.");
+            if (BackgroundScanEnabled && ScanIntervalMinutes < 1)
+                errors.Add(ResourceProvider.GetString("LOC_MediaAudit_Validation_ScanInterval"));
             if (IconMinSize < 1)
-                errors.Add("Icon minimum size must be at least 1 pixel.");
+                errors.Add(ResourceProvider.GetString("LOC_MediaAudit_Validation_IconMinSize"));
             if (CoverMinWidth < 1 || CoverMinHeight < 1)
-                errors.Add("Cover minimum dimensions must be at least 1 pixel.");
+                errors.Add(ResourceProvider.GetString("LOC_MediaAudit_Validation_CoverMinDimensions"));
             if (BackgroundMinWidth < 1 || BackgroundMinHeight < 1)
-                errors.Add("Background minimum dimensions must be at least 1 pixel.");
+                errors.Add(ResourceProvider.GetString("LOC_MediaAudit_Validation_BackgroundMinDimensions"));
             return errors.Count == 0;
         }
     }
