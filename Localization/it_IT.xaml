@@ -1,0 +1,64 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!-- Menu -->
+    <sys:String x:Key="LOC_MediaAudit_MenuSection">Media Audit</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Menu_ScanAll">Analizza i media di tutti i giochi</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Menu_ScanSelected">Analizza i media dei giochi selezionati</sys:String>
+
+    <!-- Notifications -->
+    <sys:String x:Key="LOC_MediaAudit_Notification_NoSelection">Media Audit: Nessun gioco selezionato.</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Notification_NoIssues">Media Audit: Nessun problema riscontrato.</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Notification_IssuesFound">Media Audit: {0} problemi riscontrati ({1}).</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Notification_IssuesFoundDetail">Media Audit: {0} problemi riscontrati ({1}). Controlla i tag dei giochi per i dettagli.</sys:String>
+
+    <!-- Settings: Section Headers -->
+    <sys:String x:Key="LOC_MediaAudit_Section_General">Generale</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_MediaTypes">Tipi di media da controllare</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_IconStandards">Standard delle icone</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_CoverStandards">Standard delle copertine</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_BackgroundStandards">Standard degli sfondi</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_Logo">Extra Metadata - Logo</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_Videos">Extra Metadata - Video</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_GameMusic">PlayniteSound - Musica di gioco</sys:String>
+
+    <!-- Settings: General -->
+    <sys:String x:Key="LOC_MediaAudit_Settings_BackgroundScanEnabled">Abilita analisi periodica in background</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_ScanInterval">Intervallo di analisi (minuti):</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_ReportMissing">Segnala media mancanti</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_ShowScanNotification">Mostra notifica dopo l'analisi in background</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_TagUndesiredMedia">Tagga i giochi con problemi</sys:String>
+
+    <!-- Settings: Media Types -->
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckIcons">Controlla icone</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckCovers">Controlla copertine</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckBackgrounds">Controlla sfondi</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckLogos">Controlla loghi</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckTrailers">Controlla trailer</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckMicrotrailers">Controlla microtrailer</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckGameMusic">Controlla musica di gioco</sys:String>
+
+    <!-- Settings: Common Labels -->
+    <sys:String x:Key="LOC_MediaAudit_Settings_Preset">Preimpostazione:</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_TagName">Nome del tag:</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MinSize">Dimensione min. (px):</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MaxSize">Dimensione max. (px):</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_AspectRatioTolerance">Tolleranza rapporto d'aspetto:</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_ExpectedAspectRatio">Rapporto d'aspetto previsto:</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MinWidth">Larghezza min. (px):</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MinHeight">Altezza min. (px):</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_InstalledOnly">Solo giochi installati</sys:String>
+
+    <!-- Settings: Video-specific Labels -->
+    <sys:String x:Key="LOC_MediaAudit_Settings_TrailerInstalledOnly">Trailer: solo giochi installati</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_TrailerTagName">Nome del tag del trailer:</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MicrotrailerInstalledOnly">Microtrailer: solo giochi installati</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MicrotrailerTagName">Nome del tag del microtrailer:</sys:String>
+
+    <!-- Validation Errors -->
+    <sys:String x:Key="LOC_MediaAudit_Validation_ScanInterval">L'intervallo di analisi deve essere di almeno 1 minuto.</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Validation_IconMinSize">La dimensione minima dell'icona deve essere di almeno 1 pixel.</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Validation_CoverMinDimensions">Le dimensioni minime della copertina devono essere di almeno 1 pixel.</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Validation_BackgroundMinDimensions">Le dimensioni minime dello sfondo devono essere di almeno 1 pixel.</sys:String>
+</ResourceDictionary>

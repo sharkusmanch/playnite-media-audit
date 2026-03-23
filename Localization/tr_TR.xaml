@@ -1,0 +1,64 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!-- Menu -->
+    <sys:String x:Key="LOC_MediaAudit_MenuSection">Medya Denetimi</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Menu_ScanAll">Tüm Oyun Medyalarını Tara</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Menu_ScanSelected">Seçili Oyunların Medyalarını Tara</sys:String>
+
+    <!-- Notifications -->
+    <sys:String x:Key="LOC_MediaAudit_Notification_NoSelection">Medya Denetimi: Oyun seçilmedi.</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Notification_NoIssues">Medya Denetimi: Sorun bulunamadı.</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Notification_IssuesFound">Medya Denetimi: {0} sorun bulundu ({1}).</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Notification_IssuesFoundDetail">Medya Denetimi: {0} sorun bulundu ({1}). Ayrıntılar için oyun etiketlerini kontrol edin.</sys:String>
+
+    <!-- Settings: Section Headers -->
+    <sys:String x:Key="LOC_MediaAudit_Section_General">Genel</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_MediaTypes">Kontrol Edilecek Medya Türleri</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_IconStandards">Simge Standartları</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_CoverStandards">Kapak Standartları</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_BackgroundStandards">Arka Plan Standartları</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_Logo">Ek Meta Veri - Logo</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_Videos">Ek Meta Veri - Videolar</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_GameMusic">PlayniteSound - Oyun Müziği</sys:String>
+
+    <!-- Settings: General -->
+    <sys:String x:Key="LOC_MediaAudit_Settings_BackgroundScanEnabled">Zamanlı arka plan taramasını etkinleştir</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_ScanInterval">Tarama aralığı (dakika):</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_ReportMissing">Eksik medyayı bildir</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_ShowScanNotification">Arka plan taramasından sonra bildirim göster</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_TagUndesiredMedia">Sorunlu oyunları etiketle</sys:String>
+
+    <!-- Settings: Media Types -->
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckIcons">Simgeleri kontrol et</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckCovers">Kapakları kontrol et</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckBackgrounds">Arka planları kontrol et</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckLogos">Logoları kontrol et</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckTrailers">Fragmanları kontrol et</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckMicrotrailers">Mikro fragmanları kontrol et</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckGameMusic">Oyun müziğini kontrol et</sys:String>
+
+    <!-- Settings: Common Labels -->
+    <sys:String x:Key="LOC_MediaAudit_Settings_Preset">Ön ayar:</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_TagName">Etiket adı:</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MinSize">Min boyut (px):</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MaxSize">Maks boyut (px):</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_AspectRatioTolerance">En boy oranı toleransı:</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_ExpectedAspectRatio">Beklenen en boy oranı:</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MinWidth">Min genişlik (px):</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MinHeight">Min yükseklik (px):</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_InstalledOnly">Yalnızca yüklü oyunlar</sys:String>
+
+    <!-- Settings: Video-specific Labels -->
+    <sys:String x:Key="LOC_MediaAudit_Settings_TrailerInstalledOnly">Fragmanlar: yalnızca yüklü oyunlar</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_TrailerTagName">Fragman etiket adı:</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MicrotrailerInstalledOnly">Mikro fragmanlar: yalnızca yüklü oyunlar</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MicrotrailerTagName">Mikro fragman etiket adı:</sys:String>
+
+    <!-- Validation Errors -->
+    <sys:String x:Key="LOC_MediaAudit_Validation_ScanInterval">Tarama aralığı en az 1 dakika olmalıdır.</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Validation_IconMinSize">Simge minimum boyutu en az 1 piksel olmalıdır.</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Validation_CoverMinDimensions">Kapak minimum boyutları en az 1 piksel olmalıdır.</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Validation_BackgroundMinDimensions">Arka plan minimum boyutları en az 1 piksel olmalıdır.</sys:String>
+</ResourceDictionary>

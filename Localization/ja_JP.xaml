@@ -1,0 +1,64 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!-- Menu -->
+    <sys:String x:Key="LOC_MediaAudit_MenuSection">メディア監査</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Menu_ScanAll">すべてのゲームメディアをスキャン</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Menu_ScanSelected">選択したゲームのメディアをスキャン</sys:String>
+
+    <!-- Notifications -->
+    <sys:String x:Key="LOC_MediaAudit_Notification_NoSelection">メディア監査: ゲームが選択されていません。</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Notification_NoIssues">メディア監査: 問題は見つかりませんでした。</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Notification_IssuesFound">メディア監査: {0} 件の問題が見つかりました ({1})。</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Notification_IssuesFoundDetail">メディア監査: {0} 件の問題が見つかりました ({1})。詳細はゲームタグを確認してください。</sys:String>
+
+    <!-- Settings: Section Headers -->
+    <sys:String x:Key="LOC_MediaAudit_Section_General">全般</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_MediaTypes">チェックするメディアの種類</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_IconStandards">アイコンの基準</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_CoverStandards">カバーの基準</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_BackgroundStandards">背景の基準</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_Logo">追加メタデータ - ロゴ</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_Videos">追加メタデータ - 動画</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_GameMusic">PlayniteSound - ゲームミュージック</sys:String>
+
+    <!-- Settings: General -->
+    <sys:String x:Key="LOC_MediaAudit_Settings_BackgroundScanEnabled">定期バックグラウンドスキャンを有効にする</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_ScanInterval">スキャン間隔 (分):</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_ReportMissing">不足しているメディアを報告</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_ShowScanNotification">バックグラウンドスキャン後に通知を表示</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_TagUndesiredMedia">問題のあるゲームにタグを付ける</sys:String>
+
+    <!-- Settings: Media Types -->
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckIcons">アイコンをチェック</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckCovers">カバーをチェック</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckBackgrounds">背景をチェック</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckLogos">ロゴをチェック</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckTrailers">トレーラーをチェック</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckMicrotrailers">マイクロトレーラーをチェック</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckGameMusic">ゲームミュージックをチェック</sys:String>
+
+    <!-- Settings: Common Labels -->
+    <sys:String x:Key="LOC_MediaAudit_Settings_Preset">プリセット:</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_TagName">タグ名:</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MinSize">最小サイズ (px):</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MaxSize">最大サイズ (px):</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_AspectRatioTolerance">アスペクト比の許容範囲:</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_ExpectedAspectRatio">期待するアスペクト比:</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MinWidth">最小幅 (px):</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MinHeight">最小高さ (px):</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_InstalledOnly">インストール済みのゲームのみ</sys:String>
+
+    <!-- Settings: Video-specific Labels -->
+    <sys:String x:Key="LOC_MediaAudit_Settings_TrailerInstalledOnly">トレーラー: インストール済みのゲームのみ</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_TrailerTagName">トレーラーのタグ名:</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MicrotrailerInstalledOnly">マイクロトレーラー: インストール済みのゲームのみ</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MicrotrailerTagName">マイクロトレーラーのタグ名:</sys:String>
+
+    <!-- Validation Errors -->
+    <sys:String x:Key="LOC_MediaAudit_Validation_ScanInterval">スキャン間隔は1分以上にしてください。</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Validation_IconMinSize">アイコンの最小サイズは1ピクセル以上にしてください。</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Validation_CoverMinDimensions">カバーの最小寸法は1ピクセル以上にしてください。</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Validation_BackgroundMinDimensions">背景の最小寸法は1ピクセル以上にしてください。</sys:String>
+</ResourceDictionary>
