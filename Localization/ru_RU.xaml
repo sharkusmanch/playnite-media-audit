@@ -1,0 +1,64 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!-- Menu -->
+    <sys:String x:Key="LOC_MediaAudit_MenuSection">Media Audit</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Menu_ScanAll">Сканировать медиа всех игр</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Menu_ScanSelected">Сканировать медиа выбранных игр</sys:String>
+
+    <!-- Notifications -->
+    <sys:String x:Key="LOC_MediaAudit_Notification_NoSelection">Media Audit: Игры не выбраны.</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Notification_NoIssues">Media Audit: Проблем не обнаружено.</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Notification_IssuesFound">Media Audit: Обнаружено проблем: {0} ({1}).</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Notification_IssuesFoundDetail">Media Audit: Обнаружено проблем: {0} ({1}). Проверьте теги игр для подробностей.</sys:String>
+
+    <!-- Settings: Section Headers -->
+    <sys:String x:Key="LOC_MediaAudit_Section_General">Общие</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_MediaTypes">Типы медиа для проверки</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_IconStandards">Стандарты значков</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_CoverStandards">Стандарты обложек</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_BackgroundStandards">Стандарты фонов</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_Logo">Extra Metadata - Логотип</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_Videos">Extra Metadata - Видео</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_GameMusic">PlayniteSound - Игровая музыка</sys:String>
+
+    <!-- Settings: General -->
+    <sys:String x:Key="LOC_MediaAudit_Settings_BackgroundScanEnabled">Включить фоновое сканирование по интервалу</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_ScanInterval">Интервал сканирования (минуты):</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_ReportMissing">Сообщать об отсутствующих медиа</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_ShowScanNotification">Показывать уведомление после фонового сканирования</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_TagUndesiredMedia">Помечать игры с проблемами тегами</sys:String>
+
+    <!-- Settings: Media Types -->
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckIcons">Проверять значки</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckCovers">Проверять обложки</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckBackgrounds">Проверять фоны</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckLogos">Проверять логотипы</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckTrailers">Проверять трейлеры</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckMicrotrailers">Проверять микротрейлеры</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckGameMusic">Проверять игровую музыку</sys:String>
+
+    <!-- Settings: Common Labels -->
+    <sys:String x:Key="LOC_MediaAudit_Settings_Preset">Шаблон:</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_TagName">Имя тега:</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MinSize">Мин. размер (px):</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MaxSize">Макс. размер (px):</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_AspectRatioTolerance">Допуск соотношения сторон:</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_ExpectedAspectRatio">Ожидаемое соотношение сторон:</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MinWidth">Мин. ширина (px):</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MinHeight">Мин. высота (px):</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_InstalledOnly">Только установленные игры</sys:String>
+
+    <!-- Settings: Video-specific Labels -->
+    <sys:String x:Key="LOC_MediaAudit_Settings_TrailerInstalledOnly">Трейлеры: только установленные игры</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_TrailerTagName">Имя тега трейлера:</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MicrotrailerInstalledOnly">Микротрейлеры: только установленные игры</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MicrotrailerTagName">Имя тега микротрейлера:</sys:String>
+
+    <!-- Validation Errors -->
+    <sys:String x:Key="LOC_MediaAudit_Validation_ScanInterval">Интервал сканирования должен быть не менее 1 минуты.</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Validation_IconMinSize">Минимальный размер значка должен быть не менее 1 пикселя.</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Validation_CoverMinDimensions">Минимальные размеры обложки должны быть не менее 1 пикселя.</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Validation_BackgroundMinDimensions">Минимальные размеры фона должны быть не менее 1 пикселя.</sys:String>
+</ResourceDictionary>

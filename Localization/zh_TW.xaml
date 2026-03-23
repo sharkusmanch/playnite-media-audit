@@ -1,0 +1,64 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!-- Menu -->
+    <sys:String x:Key="LOC_MediaAudit_MenuSection">媒體稽核</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Menu_ScanAll">掃描所有遊戲媒體</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Menu_ScanSelected">掃描所選遊戲的媒體</sys:String>
+
+    <!-- Notifications -->
+    <sys:String x:Key="LOC_MediaAudit_Notification_NoSelection">媒體稽核：未選擇任何遊戲。</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Notification_NoIssues">媒體稽核：未發現問題。</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Notification_IssuesFound">媒體稽核：發現 {0} 個問題 ({1})。</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Notification_IssuesFoundDetail">媒體稽核：發現 {0} 個問題 ({1})。請查看遊戲標籤以了解詳情。</sys:String>
+
+    <!-- Settings: Section Headers -->
+    <sys:String x:Key="LOC_MediaAudit_Section_General">一般</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_MediaTypes">要檢查的媒體類型</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_IconStandards">圖示標準</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_CoverStandards">封面標準</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_BackgroundStandards">背景標準</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_Logo">額外中繼資料 - 標誌</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_Videos">額外中繼資料 - 影片</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_GameMusic">PlayniteSound - 遊戲音樂</sys:String>
+
+    <!-- Settings: General -->
+    <sys:String x:Key="LOC_MediaAudit_Settings_BackgroundScanEnabled">啟用定時背景掃描</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_ScanInterval">掃描間隔（分鐘）：</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_ReportMissing">報告缺少的媒體</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_ShowScanNotification">背景掃描後顯示通知</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_TagUndesiredMedia">為有問題的遊戲加上標籤</sys:String>
+
+    <!-- Settings: Media Types -->
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckIcons">檢查圖示</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckCovers">檢查封面</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckBackgrounds">檢查背景</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckLogos">檢查標誌</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckTrailers">檢查預告片</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckMicrotrailers">檢查微預告片</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckGameMusic">檢查遊戲音樂</sys:String>
+
+    <!-- Settings: Common Labels -->
+    <sys:String x:Key="LOC_MediaAudit_Settings_Preset">預設：</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_TagName">標籤名稱：</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MinSize">最小尺寸 (px)：</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MaxSize">最大尺寸 (px)：</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_AspectRatioTolerance">長寬比容許範圍：</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_ExpectedAspectRatio">預期長寬比：</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MinWidth">最小寬度 (px)：</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MinHeight">最小高度 (px)：</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_InstalledOnly">僅已安裝的遊戲</sys:String>
+
+    <!-- Settings: Video-specific Labels -->
+    <sys:String x:Key="LOC_MediaAudit_Settings_TrailerInstalledOnly">預告片：僅已安裝的遊戲</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_TrailerTagName">預告片標籤名稱：</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MicrotrailerInstalledOnly">微預告片：僅已安裝的遊戲</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MicrotrailerTagName">微預告片標籤名稱：</sys:String>
+
+    <!-- Validation Errors -->
+    <sys:String x:Key="LOC_MediaAudit_Validation_ScanInterval">掃描間隔至少為 1 分鐘。</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Validation_IconMinSize">圖示最小尺寸至少為 1 像素。</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Validation_CoverMinDimensions">封面最小尺寸至少為 1 像素。</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Validation_BackgroundMinDimensions">背景最小尺寸至少為 1 像素。</sys:String>
+</ResourceDictionary>

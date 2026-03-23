@@ -1,0 +1,64 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!-- Menu -->
+    <sys:String x:Key="LOC_MediaAudit_MenuSection">Media Audit</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Menu_ScanAll">Scanează media tuturor jocurilor</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Menu_ScanSelected">Scanează media jocurilor selectate</sys:String>
+
+    <!-- Notifications -->
+    <sys:String x:Key="LOC_MediaAudit_Notification_NoSelection">Media Audit: Niciun joc selectat.</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Notification_NoIssues">Media Audit: Nicio problemă găsită.</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Notification_IssuesFound">Media Audit: {0} probleme găsite ({1}).</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Notification_IssuesFoundDetail">Media Audit: {0} probleme găsite ({1}). Verificați etichetele jocurilor pentru detalii.</sys:String>
+
+    <!-- Settings: Section Headers -->
+    <sys:String x:Key="LOC_MediaAudit_Section_General">General</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_MediaTypes">Tipuri de media de verificat</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_IconStandards">Standarde pentru pictograme</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_CoverStandards">Standarde pentru coperte</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_BackgroundStandards">Standarde pentru fundaluri</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_Logo">Extra Metadata - Logo</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_Videos">Extra Metadata - Videoclipuri</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_GameMusic">PlayniteSound - Muzică de joc</sys:String>
+
+    <!-- Settings: General -->
+    <sys:String x:Key="LOC_MediaAudit_Settings_BackgroundScanEnabled">Activează scanarea periodică în fundal</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_ScanInterval">Interval de scanare (minute):</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_ReportMissing">Raportează media lipsă</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_ShowScanNotification">Afișează notificare după scanarea în fundal</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_TagUndesiredMedia">Etichetează jocurile cu probleme</sys:String>
+
+    <!-- Settings: Media Types -->
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckIcons">Verifică pictogramele</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckCovers">Verifică copertele</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckBackgrounds">Verifică fundalurile</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckLogos">Verifică logourile</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckTrailers">Verifică trailerele</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckMicrotrailers">Verifică microtrailerele</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckGameMusic">Verifică muzica de joc</sys:String>
+
+    <!-- Settings: Common Labels -->
+    <sys:String x:Key="LOC_MediaAudit_Settings_Preset">Presetare:</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_TagName">Numele etichetei:</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MinSize">Dimensiune min. (px):</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MaxSize">Dimensiune max. (px):</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_AspectRatioTolerance">Toleranță raport de aspect:</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_ExpectedAspectRatio">Raport de aspect așteptat:</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MinWidth">Lățime min. (px):</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MinHeight">Înălțime min. (px):</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_InstalledOnly">Doar jocuri instalate</sys:String>
+
+    <!-- Settings: Video-specific Labels -->
+    <sys:String x:Key="LOC_MediaAudit_Settings_TrailerInstalledOnly">Trailere: doar jocuri instalate</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_TrailerTagName">Numele etichetei trailerului:</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MicrotrailerInstalledOnly">Microtrailere: doar jocuri instalate</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MicrotrailerTagName">Numele etichetei microtrailerului:</sys:String>
+
+    <!-- Validation Errors -->
+    <sys:String x:Key="LOC_MediaAudit_Validation_ScanInterval">Intervalul de scanare trebuie să fie de cel puțin 1 minut.</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Validation_IconMinSize">Dimensiunea minimă a pictogramei trebuie să fie de cel puțin 1 pixel.</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Validation_CoverMinDimensions">Dimensiunile minime ale copertei trebuie să fie de cel puțin 1 pixel.</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Validation_BackgroundMinDimensions">Dimensiunile minime ale fundalului trebuie să fie de cel puțin 1 pixel.</sys:String>
+</ResourceDictionary>

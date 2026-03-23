@@ -1,0 +1,64 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!-- Menu -->
+    <sys:String x:Key="LOC_MediaAudit_MenuSection">Media Audit</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Menu_ScanAll">Skenovat m&#233;dia v&#353;ech her</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Menu_ScanSelected">Skenovat m&#233;dia vybran&#253;ch her</sys:String>
+
+    <!-- Notifications -->
+    <sys:String x:Key="LOC_MediaAudit_Notification_NoSelection">Media Audit: Nejsou vybr&#225;ny &#382;&#225;dn&#233; hry.</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Notification_NoIssues">Media Audit: Nebyly nalezeny &#382;&#225;dn&#233; probl&#233;my.</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Notification_IssuesFound">Media Audit: Nalezeno {0} probl&#233;m&#367; ({1}).</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Notification_IssuesFoundDetail">Media Audit: Nalezeno {0} probl&#233;m&#367; ({1}). Podrobnosti naleznete ve &#353;t&#237;tc&#237;ch her.</sys:String>
+
+    <!-- Settings: Section Headers -->
+    <sys:String x:Key="LOC_MediaAudit_Section_General">Obecn&#233;</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_MediaTypes">Typy m&#233;di&#237; ke kontrole</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_IconStandards">Standardy ikon</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_CoverStandards">Standardy obal&#367;</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_BackgroundStandards">Standardy pozad&#237;</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_Logo">Extra Metadata - Logo</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_Videos">Extra Metadata - Videa</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Section_GameMusic">PlayniteSound - Hern&#237; hudba</sys:String>
+
+    <!-- Settings: General -->
+    <sys:String x:Key="LOC_MediaAudit_Settings_BackgroundScanEnabled">Povolit pravideln&#233; skenov&#225;n&#237; na pozad&#237;</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_ScanInterval">Interval skenov&#225;n&#237; (minuty):</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_ReportMissing">Hl&#225;sit chyb&#283;j&#237;c&#237; m&#233;dia</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_ShowScanNotification">Zobrazit ozn&#225;men&#237; po skenov&#225;n&#237; na pozad&#237;</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_TagUndesiredMedia">Ozna&#269;it hry s probl&#233;my</sys:String>
+
+    <!-- Settings: Media Types -->
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckIcons">Kontrolovat ikony</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckCovers">Kontrolovat obaly</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckBackgrounds">Kontrolovat pozad&#237;</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckLogos">Kontrolovat loga</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckTrailers">Kontrolovat trailery</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckMicrotrailers">Kontrolovat mikrotrailery</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_CheckGameMusic">Kontrolovat hern&#237; hudbu</sys:String>
+
+    <!-- Settings: Common Labels -->
+    <sys:String x:Key="LOC_MediaAudit_Settings_Preset">P&#345;edvolba:</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_TagName">N&#225;zev &#353;t&#237;tku:</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MinSize">Min. velikost (px):</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MaxSize">Max. velikost (px):</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_AspectRatioTolerance">Tolerance pom&#283;ru stran:</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_ExpectedAspectRatio">O&#269;ek&#225;van&#253; pom&#283;r stran:</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MinWidth">Min. &#353;&#237;&#345;ka (px):</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MinHeight">Min. v&#253;&#353;ka (px):</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_InstalledOnly">Pouze nainstalovan&#233; hry</sys:String>
+
+    <!-- Settings: Video-specific Labels -->
+    <sys:String x:Key="LOC_MediaAudit_Settings_TrailerInstalledOnly">Trailery: pouze nainstalovan&#233; hry</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_TrailerTagName">N&#225;zev &#353;t&#237;tku traileru:</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MicrotrailerInstalledOnly">Mikrotrailery: pouze nainstalovan&#233; hry</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_MicrotrailerTagName">N&#225;zev &#353;t&#237;tku mikrotraileru:</sys:String>
+
+    <!-- Validation Errors -->
+    <sys:String x:Key="LOC_MediaAudit_Validation_ScanInterval">Interval skenov&#225;n&#237; mus&#237; b&#253;t alespo&#328; 1 minuta.</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Validation_IconMinSize">Minim&#225;ln&#237; velikost ikony mus&#237; b&#253;t alespo&#328; 1 pixel.</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Validation_CoverMinDimensions">Minim&#225;ln&#237; rozm&#283;ry obalu mus&#237; b&#253;t alespo&#328; 1 pixel.</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Validation_BackgroundMinDimensions">Minim&#225;ln&#237; rozm&#283;ry pozad&#237; mus&#237; b&#253;t alespo&#328; 1 pixel.</sys:String>
+</ResourceDictionary>
