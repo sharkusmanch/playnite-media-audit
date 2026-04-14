@@ -140,8 +140,9 @@ namespace MediaAudit
             {
                 filePath = _api.Database.GetFullFilePath(mediaRef);
             }
-            catch
+            catch (Exception ex)
             {
+                logger.Warn(ex, $"Failed to resolve file path for media ref '{mediaRef}' on game '{game.Name}'.");
                 return;
             }
 

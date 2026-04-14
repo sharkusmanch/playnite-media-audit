@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace MediaAudit
@@ -17,7 +18,7 @@ namespace MediaAudit
 
         public override Guid Id { get; } = Guid.Parse("2e6b5e8a-c42d-4e5b-9f1a-3d7c8e4a6b2f");
 
-        internal MediaAuditSettings Settings { get; set; }
+        private MediaAuditSettings Settings { get; set; }
         private Timer _scanTimer;
         private Timer _debounceTimer;
         private readonly object _scanLock = new object();
@@ -154,11 +155,12 @@ namespace MediaAudit
                         issues.GroupBy(i => i.MediaType)
                               .Select(g => $"{g.Count()} {g.Key}"));
 
-                    PlayniteApi.Notifications.Add(new NotificationMessage(
-                        "MediaAudit_BackgroundScan",
-                        string.Format(ResourceProvider.GetString("LOC_MediaAudit_Notification_IssuesFound"),
-                            issues.Count, summary),
-                        NotificationType.Info));
+                    Application.Current.Dispatcher.Invoke(() =>
+                        PlayniteApi.Notifications.Add(new NotificationMessage(
+                            "MediaAudit_BackgroundScan",
+                            string.Format(ResourceProvider.GetString("LOC_MediaAudit_Notification_IssuesFound"),
+                                issues.Count, summary),
+                            NotificationType.Info)));
                 }
 
                 logger.Info($"Background media scan complete. {issues.Count} issues found.");
@@ -184,10 +186,11 @@ namespace MediaAudit
 
                 if (issues.Count == 0)
                 {
-                    PlayniteApi.Notifications.Add(new NotificationMessage(
-                        "MediaAudit_ManualScan",
-                        ResourceProvider.GetString("LOC_MediaAudit_Notification_NoIssues"),
-                        NotificationType.Info));
+                    Application.Current.Dispatcher.Invoke(() =>
+                        PlayniteApi.Notifications.Add(new NotificationMessage(
+                            "MediaAudit_ManualScan",
+                            ResourceProvider.GetString("LOC_MediaAudit_Notification_NoIssues"),
+                            NotificationType.Info)));
                 }
                 else
                 {
@@ -195,11 +198,12 @@ namespace MediaAudit
                         issues.GroupBy(i => i.MediaType)
                               .Select(g => $"{g.Count()} {g.Key}"));
 
-                    PlayniteApi.Notifications.Add(new NotificationMessage(
-                        "MediaAudit_ManualScan",
-                        string.Format(ResourceProvider.GetString("LOC_MediaAudit_Notification_IssuesFoundDetail"),
-                            issues.Count, summary),
-                        NotificationType.Info));
+                    Application.Current.Dispatcher.Invoke(() =>
+                        PlayniteApi.Notifications.Add(new NotificationMessage(
+                            "MediaAudit_ManualScan",
+                            string.Format(ResourceProvider.GetString("LOC_MediaAudit_Notification_IssuesFoundDetail"),
+                                issues.Count, summary),
+                            NotificationType.Info)));
                 }
             }
         }

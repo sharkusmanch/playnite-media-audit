@@ -8,21 +8,23 @@ using System.Windows.Data;
 
 namespace MediaAudit
 {
-    public class MediaPreset
-    {
-        public string Name { get; set; }
-        public double AspectRatio { get; set; }
-        public double Tolerance { get; set; }
-        public int MinWidth { get; set; }
-        public int MinHeight { get; set; }
-        public int MaxWidth { get; set; }
-        public int MaxHeight { get; set; }
-
-        public override string ToString() => Name;
-    }
-
     public class MediaAuditSettingsView : UserControl
     {
+        private static readonly ILogger logger = LogManager.GetLogger();
+
+        private class MediaPreset
+        {
+            public string Name { get; set; }
+            public double AspectRatio { get; set; }
+            public double Tolerance { get; set; }
+            public int MinWidth { get; set; }
+            public int MinHeight { get; set; }
+            public int MaxWidth { get; set; }
+            public int MaxHeight { get; set; }
+
+            public override string ToString() => Name;
+        }
+
         private static readonly List<MediaPreset> IconPresets = new List<MediaPreset>
         {
             new MediaPreset { Name = "Square 1:1 (default)",   AspectRatio = 1.0, Tolerance = 0.1, MinWidth = 64,  MinHeight = 64,  MaxWidth = 512,  MaxHeight = 512 },
@@ -66,6 +68,7 @@ namespace MediaAudit
 
         public MediaAuditSettingsView()
         {
+            logger.Debug("Initializing settings view.");
             var mainStack = new StackPanel { Margin = new Thickness(20) };
 
             AddSection(mainStack, Loc("LOC_MediaAudit_Section_General"), stack =>
