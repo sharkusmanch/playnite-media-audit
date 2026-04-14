@@ -68,6 +68,7 @@ namespace MediaAudit
 
         public MediaAuditSettingsView()
         {
+            logger.Debug("Initializing settings view.");
             var mainStack = new StackPanel { Margin = new Thickness(20) };
 
             AddSection(mainStack, Loc("LOC_MediaAudit_Section_General"), stack =>
