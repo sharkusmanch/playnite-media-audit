@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace MediaAudit
 {
@@ -30,6 +31,32 @@ namespace MediaAudit
         public int Width { get; set; }
         public int Height { get; set; }
         public string Description { get; set; }
+    }
+
+    public class ScanResult
+    {
+        public List<MediaIssue> Issues { get; } = new List<MediaIssue>();
+
+        // Game/media combinations the scan could not evaluate — an unreadable file, a
+        // path Playnite would not resolve. Distinct from "no issue found": tags for
+        // these are left as they are, so a transient failure can't strip a library.
+        private readonly Dictionary<Guid, HashSet<MediaType>> _indeterminate =
+            new Dictionary<Guid, HashSet<MediaType>>();
+
+        public void MarkIndeterminate(Guid gameId, MediaType mediaType)
+        {
+            if (!_indeterminate.TryGetValue(gameId, out var types))
+            {
+                types = new HashSet<MediaType>();
+                _indeterminate[gameId] = types;
+            }
+            types.Add(mediaType);
+        }
+
+        public bool IsIndeterminate(Guid gameId, MediaType mediaType)
+        {
+            return _indeterminate.TryGetValue(gameId, out var types) && types.Contains(mediaType);
+        }
     }
 
     public class MediaStandards

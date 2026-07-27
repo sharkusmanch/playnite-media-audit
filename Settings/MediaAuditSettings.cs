@@ -12,6 +12,15 @@ namespace MediaAudit
         private readonly MediaAuditPlugin _plugin;
         private MediaAuditSettings _previousSettings;
 
+        // Guards TagIds against a scan writing new tag GUIDs on the timer thread while
+        // the UI thread serializes this object. Plain fields aren't serialized, so
+        // neither of these ends up in the settings JSON.
+        internal readonly object TagIdsLock = new object();
+
+        // True between BeginEdit and End/CancelEdit. A scan that finishes in that window
+        // must not persist settings, or it would commit edits the user may still cancel.
+        internal bool IsEditing;
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void NotifyPropertyChanged([CallerMemberName] string name = "")
@@ -53,6 +62,16 @@ namespace MediaAudit
         {
             get => _tagUndesiredMedia;
             set { _tagUndesiredMedia = value; NotifyPropertyChanged(); }
+        }
+
+        // GUIDs of the tags this plugin owns, keyed by media type. Tags are managed by
+        // ID rather than by name so that renaming one in settings renames the existing
+        // tag instead of orphaning it and adopting a second one.
+        private Dictionary<MediaType, Guid> _tagIds = new Dictionary<MediaType, Guid>();
+        public Dictionary<MediaType, Guid> TagIds
+        {
+            get => _tagIds;
+            set { _tagIds = value ?? new Dictionary<MediaType, Guid>(); NotifyPropertyChanged(); }
         }
 
         private string _iconTagName = "Undesired Icon";
@@ -305,6 +324,34 @@ namespace MediaAudit
             }
         }
 
+        // Media types the current settings actually audit. Tag handling keys off this,
+        // so a disabled check neither creates its tag nor strips it from games.
+        internal IEnumerable<MediaType> EnabledMediaTypes()
+        {
+            if (CheckIcons) yield return MediaType.Icon;
+            if (CheckCovers) yield return MediaType.Cover;
+            if (CheckBackgrounds) yield return MediaType.Background;
+            if (CheckLogos) yield return MediaType.Logo;
+            if (CheckTrailers) yield return MediaType.Trailer;
+            if (CheckMicrotrailers) yield return MediaType.Microtrailer;
+            if (CheckGameMusic) yield return MediaType.GameMusic;
+        }
+
+        internal string TagNameFor(MediaType mediaType)
+        {
+            switch (mediaType)
+            {
+                case MediaType.Icon: return IconTagName;
+                case MediaType.Cover: return CoverTagName;
+                case MediaType.Background: return BackgroundTagName;
+                case MediaType.Logo: return LogoTagName;
+                case MediaType.Trailer: return TrailerTagName;
+                case MediaType.Microtrailer: return MicrotrailerTagName;
+                case MediaType.GameMusic: return GameMusicTagName;
+                default: return null;
+            }
+        }
+
         private void CopyFrom(MediaAuditSettings source)
         {
             BackgroundScanEnabled = source.BackgroundScanEnabled;
@@ -312,6 +359,9 @@ namespace MediaAudit
             ReportMissing = source.ReportMissing;
             ShowScanNotification = source.ShowScanNotification;
             TagUndesiredMedia = source.TagUndesiredMedia;
+            TagIds = source.TagIds == null
+                ? new Dictionary<MediaType, Guid>()
+                : new Dictionary<MediaType, Guid>(source.TagIds);
             IconTagName = source.IconTagName;
             CoverTagName = source.CoverTagName;
             BackgroundTagName = source.BackgroundTagName;
@@ -349,17 +399,31 @@ namespace MediaAudit
 
         public void BeginEdit()
         {
+            IsEditing = true;
             _previousSettings = Serialization.GetClone(this);
         }
 
         public void CancelEdit()
         {
+            // Tag ownership isn't part of the edit transaction. A scan may have created
+            // tags and applied them to games while the dialog was open; reverting those
+            // GUIDs would orphan exactly the tags this plugin just started managing.
+            var ownedTagIds = TagIds;
             CopyFrom(_previousSettings);
+            TagIds = ownedTagIds;
+            IsEditing = false;
         }
 
         public void EndEdit()
         {
-            _plugin.SavePluginSettings(this);
+            IsEditing = false;
+            lock (TagIdsLock)
+            {
+                _plugin.SavePluginSettings(this);
+            }
+            // Pick up a changed interval or a toggled-off background scan now, rather
+            // than leaving the old schedule running until Playnite restarts.
+            _plugin.ApplyScanSchedule();
         }
 
         public bool VerifySettings(out List<string> errors)
