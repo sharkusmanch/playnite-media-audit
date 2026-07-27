@@ -209,7 +209,8 @@ namespace MediaAudit
         // An .ico holds several frames. GDI+ surfaces the smallest of them (16x16 on a
         // typical 8-frame icon) regardless of frame order, which reads a well-formed
         // 64x64 icon as undersized. The ICONDIR header lists every frame, so use it.
-        private static bool TryGetIconDimensions(byte[] bytes, out int width, out int height)
+        // internal rather than private so the tests can call it directly.
+        internal static bool TryGetIconDimensions(byte[] bytes, out int width, out int height)
         {
             width = 0;
             height = 0;

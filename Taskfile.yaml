@@ -7,12 +7,17 @@ tasks:
   - task: clean
   - task: format
   - task: build
+  - task: test
   - task: pack
   - task: install
 
   build:
     cmds:
     - dotnet build MediaAudit.csproj --configuration Release
+
+  test:
+    cmds:
+    - dotnet test Tests/MediaAudit.Tests.csproj --configuration Release
 
   format:
     cmds:

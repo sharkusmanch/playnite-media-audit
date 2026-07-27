@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <!-- The test project lives under Tests/ and has its own csproj; without this the
+         SDK's default **/*.cs glob would also compile it into the plugin. -->
+    <Compile Remove="Tests/**" />
+    <None Remove="Tests/**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="PlayniteSDK" Version="6.16.0" />
   </ItemGroup>
 

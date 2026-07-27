@@ -33,6 +33,34 @@ namespace MediaAudit
         public string Description { get; set; }
     }
 
+    internal enum TagAction
+    {
+        Leave,
+        Add,
+        Remove
+    }
+
+    internal static class TagDecision
+    {
+        // The whole point of the three-state scan result comes down to this: a media type
+        // the scan could not evaluate keeps whatever tag it already has, because absence
+        // of a finding is not a clean bill of health. Kept as a pure function so the
+        // truth table can be tested without a Playnite database.
+        internal static TagAction For(bool hasTag, bool shouldTag, bool indeterminate)
+        {
+            if (!shouldTag && indeterminate)
+                return TagAction.Leave;
+
+            if (shouldTag && !hasTag)
+                return TagAction.Add;
+
+            if (!shouldTag && hasTag)
+                return TagAction.Remove;
+
+            return TagAction.Leave;
+        }
+    }
+
     public class ScanResult
     {
         public List<MediaIssue> Issues { get; } = new List<MediaIssue>();

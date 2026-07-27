@@ -63,6 +63,12 @@ jobs:
       - name: Extract Playnite
         run: 7z x ${{ runner.temp }}/playnite/*.7z -o${{ runner.temp }}/playnite
 
+      # Tests gate the release too, so a workflow_dispatch can't ship a build that
+      # never had them run against it.
+      - name: Test
+        run: |
+          dotnet test Tests/MediaAudit.Tests.csproj -c Release
+
       - run: |
           dotnet build MediaAudit.csproj -c Release
           ${{ runner.temp }}/playnite/Toolbox.exe pack bin/Release/net462/ dist

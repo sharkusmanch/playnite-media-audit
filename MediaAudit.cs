@@ -441,23 +441,21 @@ namespace MediaAudit
                                 bool hasTag = game.TagIds?.Contains(tag.Id) == true;
                                 bool shouldTag = gameIssueTypes != null
                                     && group.Types.Any(t => gameIssueTypes.Contains(t));
+                                bool indeterminate = group.Types.Any(t => result.IsIndeterminate(gameId, t));
 
-                                // Media the scan couldn't evaluate keeps whatever tag it
-                                // already has — absence of a finding isn't a clean bill.
-                                if (!shouldTag && group.Types.Any(t => result.IsIndeterminate(gameId, t)))
-                                    continue;
+                                switch (TagDecision.For(hasTag, shouldTag, indeterminate))
+                                {
+                                    case TagAction.Add:
+                                        if (game.TagIds == null)
+                                            game.TagIds = new List<Guid>();
+                                        game.TagIds.Add(tag.Id);
+                                        changed = true;
+                                        break;
 
-                                if (shouldTag && !hasTag)
-                                {
-                                    if (game.TagIds == null)
-                                        game.TagIds = new List<Guid>();
-                                    game.TagIds.Add(tag.Id);
-                                    changed = true;
-                                }
-                                else if (!shouldTag && hasTag)
-                                {
-                                    game.TagIds.Remove(tag.Id);
-                                    changed = true;
+                                    case TagAction.Remove:
+                                        game.TagIds.Remove(tag.Id);
+                                        changed = true;
+                                        break;
                                 }
                             }
 

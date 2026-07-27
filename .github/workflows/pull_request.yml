@@ -53,3 +53,7 @@ jobs:
       # release publishes, blocking the release-downloader upgrade.
       - run: |
           dotnet build MediaAudit.csproj -c Release
+
+      - name: Test
+        run: |
+          dotnet test Tests/MediaAudit.Tests.csproj -c Release
