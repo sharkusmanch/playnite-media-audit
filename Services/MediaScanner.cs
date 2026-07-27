@@ -189,17 +189,22 @@ namespace MediaAudit
 
             if (!File.Exists(filePath))
             {
-                // A reference pointing at a file that is gone is a genuine defect, and
-                // reporting it is the point of the audit. ReportMissing governs media
-                // that was never set, which is a different thing, so it doesn't gate this.
-                result.Issues.Add(new MediaIssue
+                // A reference pointing at a file that is gone was previously skipped in
+                // silence, which then drove tag removal. It is reported now, but under
+                // ReportMissing: it is still a missing-media report, and gating it means
+                // upgrading users don't find new tags they never opted into.
+                if (_settings.ReportMissing)
                 {
-                    GameId = game.Id,
-                    GameName = game.Name,
-                    MediaType = mediaType,
-                    IssueType = IssueType.Missing,
-                    Description = $"{mediaType} file is referenced but missing: {filePath}"
-                });
+                    result.Issues.Add(new MediaIssue
+                    {
+                        GameId = game.Id,
+                        GameName = game.Name,
+                        MediaType = mediaType,
+                        IssueType = IssueType.Missing,
+                        Description = $"{mediaType} file is referenced but missing: {filePath}"
+                    });
+                }
+
                 return;
             }
 
