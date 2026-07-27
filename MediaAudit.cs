@@ -313,16 +313,48 @@ namespace MediaAudit
         // needs one, so disabled or clean checks don't litter the tag list.
         private Dictionary<MediaType, Tag> ResolveTags(HashSet<MediaType> typesWithIssues)
         {
+            // Work from a snapshot so TagIdsLock is never held across a Playnite database
+            // call. Tags.Add/Update raise events Playnite's own UI subscribes to; holding
+            // the lock through them would deadlock against the UI thread waiting on it in
+            // BeginEdit or CancelEdit.
+            Dictionary<MediaType, Guid> storedIds;
             lock (Settings.TagIdsLock)
             {
-                return ResolveTagsCore(typesWithIssues);
+                storedIds = new Dictionary<MediaType, Guid>(Settings.TagIds);
             }
+
+            var resolvedIds = new Dictionary<MediaType, Guid>();
+            var tagMap = ResolveTagsCore(typesWithIssues, storedIds, resolvedIds);
+
+            bool storedIdsChanged = false;
+            lock (Settings.TagIdsLock)
+            {
+                foreach (var kvp in resolvedIds)
+                {
+                    if (!Settings.TagIds.TryGetValue(kvp.Key, out var knownId) || knownId != kvp.Value)
+                    {
+                        Settings.TagIds[kvp.Key] = kvp.Value;
+                        storedIdsChanged = true;
+                    }
+                }
+
+                // Never persist mid-edit: SavePluginSettings writes the whole live settings
+                // object, which the open dialog is binding into on every keystroke, so this
+                // would commit changes the user can still cancel. The GUIDs stay in memory
+                // and are written by EndEdit, or by the next scan once the dialog is closed.
+                if (storedIdsChanged && !Settings.IsEditing)
+                    SavePluginSettings(Settings);
+            }
+
+            return tagMap;
         }
 
-        private Dictionary<MediaType, Tag> ResolveTagsCore(HashSet<MediaType> typesWithIssues)
+        private Dictionary<MediaType, Tag> ResolveTagsCore(
+            HashSet<MediaType> typesWithIssues,
+            Dictionary<MediaType, Guid> storedIds,
+            Dictionary<MediaType, Guid> resolvedIds)
         {
             var tagMap = new Dictionary<MediaType, Tag>();
-            bool storedIdsChanged = false;
 
             foreach (var mediaType in Settings.EnabledMediaTypes())
             {
@@ -331,7 +363,7 @@ namespace MediaAudit
                     continue;
 
                 Tag tag = null;
-                if (Settings.TagIds.TryGetValue(mediaType, out var storedId) && storedId != Guid.Empty)
+                if (storedIds.TryGetValue(mediaType, out var storedId) && storedId != Guid.Empty)
                 {
                     tag = PlayniteApi.Database.Tags.Get(storedId);
                     if (tag != null && tag.Name != name)
@@ -360,21 +392,9 @@ namespace MediaAudit
                     PlayniteApi.Database.Tags.Add(tag);
                 }
 
-                if (!Settings.TagIds.TryGetValue(mediaType, out var knownId) || knownId != tag.Id)
-                {
-                    Settings.TagIds[mediaType] = tag.Id;
-                    storedIdsChanged = true;
-                }
-
+                resolvedIds[mediaType] = tag.Id;
                 tagMap[mediaType] = tag;
             }
-
-            // Never persist mid-edit: SavePluginSettings writes the whole live settings
-            // object, which the open dialog is binding into on every keystroke, so this
-            // would commit changes the user can still cancel. The GUIDs stay in memory
-            // and are written by EndEdit, or by the next scan once the dialog is closed.
-            if (storedIdsChanged && !Settings.IsEditing)
-                SavePluginSettings(Settings);
 
             return tagMap;
         }

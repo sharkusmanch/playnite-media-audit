@@ -232,7 +232,7 @@ namespace MediaAudit
                 // "indeterminate" instead of inventing a verdict.
                 long imageOffset = BitConverter.ToUInt32(bytes, entry + 12);
                 long bytesInRes = BitConverter.ToUInt32(bytes, entry + 8);
-                if (imageOffset < 6 || bytesInRes <= 0 || imageOffset + bytesInRes > bytes.Length)
+                if (imageOffset < 6 + (count * 16) || bytesInRes <= 0 || imageOffset + bytesInRes > bytes.Length)
                 {
                     width = 0;
                     height = 0;

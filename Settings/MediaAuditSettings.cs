@@ -400,17 +400,29 @@ namespace MediaAudit
         public void BeginEdit()
         {
             IsEditing = true;
-            _previousSettings = Serialization.GetClone(this);
+            lock (TagIdsLock)
+            {
+                // GetClone serializes this object, which enumerates TagIds. A scan on the
+                // timer thread writes to that same dictionary, so the clone has to take
+                // the lock or opening settings mid-scan can throw.
+                _previousSettings = Serialization.GetClone(this);
+            }
         }
 
         public void CancelEdit()
         {
-            // Tag ownership isn't part of the edit transaction. A scan may have created
-            // tags and applied them to games while the dialog was open; reverting those
-            // GUIDs would orphan exactly the tags this plugin just started managing.
-            var ownedTagIds = TagIds;
-            CopyFrom(_previousSettings);
-            TagIds = ownedTagIds;
+            lock (TagIdsLock)
+            {
+                // Tag ownership isn't part of the edit transaction. A scan may have created
+                // tags and applied them to games while the dialog was open; reverting those
+                // GUIDs would orphan exactly the tags this plugin just started managing.
+                // The swap has to be atomic against a scan: CopyFrom installs a dictionary
+                // from the stale snapshot, and a GUID written into it before the restore
+                // below would be thrown away with it.
+                var ownedTagIds = TagIds;
+                CopyFrom(_previousSettings);
+                TagIds = ownedTagIds;
+            }
             IsEditing = false;
         }
 
