@@ -7,7 +7,7 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Validate version consistency
         run: |
@@ -46,18 +46,14 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
-      - uses: robinraju/release-downloader@v1.8
-        id: download_playnite
-        with:
-          repository: "JosefNemec/Playnite"
-          latest: true
-          tarBall: false
-          zipBall: false
-          fileName: "Playnite*.zip"
-          out-file-path: ${{ runner.temp }}/playnite
-          extract: true
-
+      # No Playnite download here: only the release job needs Toolbox.exe to pack the
+      # .pext. The old step also globbed Playnite*.zip, which no current Playnite
+      # release publishes, blocking the release-downloader upgrade.
       - run: |
           dotnet build MediaAudit.csproj -c Release
+
+      - name: Test
+        run: |
+          dotnet test Tests/MediaAudit.Tests.csproj -c Release

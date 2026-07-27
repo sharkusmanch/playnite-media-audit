@@ -1,5 +1,19 @@
 AddonId: MediaAudit_2e6b5e8ac42d4e5b
 Packages:
+  - Version: 1.1.0
+    RequiredApiVersion: 6.16.0
+    ReleaseDate: 2026-07-26
+    PackageUrl: https://github.com/sharkusmanch/playnite-media-audit/releases/download/v1.1.0/MediaAudit_v1.1.0.pext
+    Changelog:
+      - Fix icons being measured at their smallest frame, which falsely tagged well-formed .ico files as undersized
+      - Note: the first scan after upgrading will clear icon tags that this bug applied in error, which can be a large number on big libraries
+      - Report media that is referenced but whose file no longer exists, instead of skipping it silently (only when "report missing" is enabled)
+      - Stop removing tags when media could not be evaluated (unreadable file, unresolved path, uninstalled game, remote URL)
+      - Own tags by ID so renaming a tag updates it instead of orphaning it, and user tags with matching names are no longer hijacked
+      - Only create and manage tags for media types that are actually enabled
+      - Apply background scan interval and enable/disable changes immediately instead of requiring a restart
+      - Keep tagging the rest of the library when a single game fails
+      - Update PlayniteSDK to 6.16.0 (now the minimum required Playnite API version)
   - Version: 1.0.1
     RequiredApiVersion: 6.11.0
     ReleaseDate: 2026-03-23

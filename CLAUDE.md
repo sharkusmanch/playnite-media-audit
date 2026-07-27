@@ -71,8 +71,9 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 This project targets **.NET Framework 4.6.2**. C# 8+ features (nullable reference types, switch expressions, using declarations) are not available.
 
 **Build**
-- Use `MSBuild.exe` (Visual Studio / VS Build Tools), not `dotnet build`. The `dotnet` CLI does not generate `.g.cs` XAML code-behind files for WPF on .NET Framework — the build will succeed but the view won't work.
-- This project uses **SDK-style `.csproj`** (`Microsoft.NET.Sdk.WindowsDesktop`). New `.cs` files are auto-included by default. Do not add `<Compile Include>` entries manually.
+- Use `dotnet build MediaAudit.csproj -c Release`. This is what the Taskfile and both workflows run, and it builds clean.
+- There is no compiled XAML in this project: the settings view is constructed in code (`Settings/MediaAuditSettingsView.cs`), and `Localization/*.xaml` ship as `Content` resource dictionaries, not `Page` items. So no `.g.cs` code-behind generation is involved. If a `Page`-compiled XAML view is ever added, revisit this — `MSBuild.exe` from Visual Studio / VS Build Tools is the safer path for WPF code-behind generation on .NET Framework.
+- This project uses **SDK-style `.csproj`** (`Microsoft.NET.Sdk`). New `.cs` files are auto-included by default. Do not add `<Compile Include>` entries manually.
 - When adding NuGet packages, only use versions that ship a `net462` (or `net461`/`net45`) target folder. Don't rely on `netstandard2.0` fallbacks — they can silently break at runtime inside Playnite's AppDomain.
 
 **Naming** (Section 5 naming rules take priority over "match existing style" — don't perpetuate violations in new code)
