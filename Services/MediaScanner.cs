@@ -292,23 +292,34 @@ namespace MediaAudit
 
             var standards = GetStandards(mediaType);
             double aspectRatio = (double)width / height;
+            bool hasIssue = false;
+            var issues = new List<string>();
 
-            if (Math.Abs(aspectRatio - standards.ExpectedAspectRatio) > standards.AspectRatioTolerance)
+            // Check aspect ratio range
+            if (standards.MinAspectRatio > 0 && standards.MaxAspectRatio > 0)
             {
-                result.Issues.Add(new MediaIssue
+                if (aspectRatio < standards.MinAspectRatio || aspectRatio > standards.MaxAspectRatio)
                 {
-                    GameId = game.Id,
-                    GameName = game.Name,
-                    MediaType = mediaType,
-                    IssueType = IssueType.BadAspectRatio,
-                    Width = width,
-                    Height = height,
-                    Description = $"Aspect ratio {aspectRatio:F2} (expected ~{standards.ExpectedAspectRatio:F2}), {width}x{height}"
-                });
+                    hasIssue = true;
+                    issues.Add($"Aspect ratio {aspectRatio:F2} out of range ({standards.MinAspectRatio:F2}-{standards.MaxAspectRatio:F2})");
+                    result.Issues.Add(new MediaIssue
+                    {
+                        GameId = game.Id,
+                        GameName = game.Name,
+                        MediaType = mediaType,
+                        IssueType = IssueType.BadAspectRatio,
+                        Width = width,
+                        Height = height,
+                        Description = $"Aspect ratio {aspectRatio:F2} out of range ({standards.MinAspectRatio:F2}-{standards.MaxAspectRatio:F2}), {width}x{height}"
+                    });
+                }
             }
 
-            if (width < standards.MinWidth || height < standards.MinHeight)
+            // Check width range
+            if (standards.MinWidth > 0 && width < standards.MinWidth)
             {
+                hasIssue = true;
+                issues.Add($"Width {width} below minimum {standards.MinWidth}");
                 result.Issues.Add(new MediaIssue
                 {
                     GameId = game.Id,
@@ -317,13 +328,13 @@ namespace MediaAudit
                     IssueType = IssueType.LowResolution,
                     Width = width,
                     Height = height,
-                    Description = $"Too low: {width}x{height} (min {standards.MinWidth}x{standards.MinHeight})"
+                    Description = $"Width {width} below minimum {standards.MinWidth}, {width}x{height}"
                 });
             }
-
-            if (standards.MaxWidth > 0 && standards.MaxHeight > 0 &&
-                (width > standards.MaxWidth || height > standards.MaxHeight))
+            else if (standards.MaxWidth > 0 && width > standards.MaxWidth)
             {
+                hasIssue = true;
+                issues.Add($"Width {width} exceeds maximum {standards.MaxWidth}");
                 result.Issues.Add(new MediaIssue
                 {
                     GameId = game.Id,
@@ -332,8 +343,53 @@ namespace MediaAudit
                     IssueType = IssueType.HighResolution,
                     Width = width,
                     Height = height,
-                    Description = $"Too high: {width}x{height} (max {standards.MaxWidth}x{standards.MaxHeight})"
+                    Description = $"Width {width} exceeds maximum {standards.MaxWidth}, {width}x{height}"
                 });
+            }
+
+            // Check height range
+            if (standards.MinHeight > 0 && height < standards.MinHeight)
+            {
+                hasIssue = true;
+                issues.Add($"Height {height} below minimum {standards.MinHeight}");
+                // Only add if not already added for width issue
+                if (issues.Count == 1 || !issues.Any(i => i.Contains("Height")))
+                {
+                    result.Issues.Add(new MediaIssue
+                    {
+                        GameId = game.Id,
+                        GameName = game.Name,
+                        MediaType = mediaType,
+                        IssueType = IssueType.LowResolution,
+                        Width = width,
+                        Height = height,
+                        Description = $"Height {height} below minimum {standards.MinHeight}, {width}x{height}"
+                    });
+                }
+            }
+            else if (standards.MaxHeight > 0 && height > standards.MaxHeight)
+            {
+                hasIssue = true;
+                issues.Add($"Height {height} exceeds maximum {standards.MaxHeight}");
+                if (issues.Count == 1 || !issues.Any(i => i.Contains("Height")))
+                {
+                    result.Issues.Add(new MediaIssue
+                    {
+                        GameId = game.Id,
+                        GameName = game.Name,
+                        MediaType = mediaType,
+                        IssueType = IssueType.HighResolution,
+                        Width = width,
+                        Height = height,
+                        Description = $"Height {height} exceeds maximum {standards.MaxHeight}, {width}x{height}"
+                    });
+                }
+            }
+
+            if (!hasIssue && _settings.ReportMissing)
+            {
+                // No issues found, but we don't add any issue here
+                // This is fine - the image meets all criteria
             }
         }
 
@@ -344,36 +400,42 @@ namespace MediaAudit
                 case MediaType.Icon:
                     return new MediaStandards
                     {
-                        ExpectedAspectRatio = 1.0,
-                        AspectRatioTolerance = _settings.IconAspectRatioTolerance,
-                        MinWidth = _settings.IconMinSize,
-                        MinHeight = _settings.IconMinSize,
-                        MaxWidth = _settings.IconMaxSize,
-                        MaxHeight = _settings.IconMaxSize
+                        MinAspectRatio = _settings.IconMinAspectRatio,
+                        MaxAspectRatio = _settings.IconMaxAspectRatio,
+                        MinWidth = _settings.IconMinWidth,
+                        MaxWidth = _settings.IconMaxWidth,
+                        MinHeight = _settings.IconMinHeight,
+                        MaxHeight = _settings.IconMaxHeight
                     };
                 case MediaType.Cover:
                     return new MediaStandards
                     {
-                        ExpectedAspectRatio = _settings.CoverAspectRatio,
-                        AspectRatioTolerance = _settings.CoverAspectRatioTolerance,
+                        MinAspectRatio = _settings.CoverMinAspectRatio,
+                        MaxAspectRatio = _settings.CoverMaxAspectRatio,
                         MinWidth = _settings.CoverMinWidth,
-                        MinHeight = _settings.CoverMinHeight
+                        MaxWidth = _settings.CoverMaxWidth,
+                        MinHeight = _settings.CoverMinHeight,
+                        MaxHeight = _settings.CoverMaxHeight
                     };
                 case MediaType.Background:
                     return new MediaStandards
                     {
-                        ExpectedAspectRatio = _settings.BackgroundAspectRatio,
-                        AspectRatioTolerance = _settings.BackgroundAspectRatioTolerance,
+                        MinAspectRatio = _settings.BackgroundMinAspectRatio,
+                        MaxAspectRatio = _settings.BackgroundMaxAspectRatio,
                         MinWidth = _settings.BackgroundMinWidth,
-                        MinHeight = _settings.BackgroundMinHeight
+                        MaxWidth = _settings.BackgroundMaxWidth,
+                        MinHeight = _settings.BackgroundMinHeight,
+                        MaxHeight = _settings.BackgroundMaxHeight
                     };
                 case MediaType.Logo:
                     return new MediaStandards
                     {
-                        ExpectedAspectRatio = _settings.LogoAspectRatio,
-                        AspectRatioTolerance = _settings.LogoAspectRatioTolerance,
+                        MinAspectRatio = _settings.LogoMinAspectRatio,
+                        MaxAspectRatio = _settings.LogoMaxAspectRatio,
                         MinWidth = _settings.LogoMinWidth,
-                        MinHeight = _settings.LogoMinHeight
+                        MaxWidth = _settings.LogoMaxWidth,
+                        MinHeight = _settings.LogoMinHeight,
+                        MaxHeight = _settings.LogoMaxHeight
                     };
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type));

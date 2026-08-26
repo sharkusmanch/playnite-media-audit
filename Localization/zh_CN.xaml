@@ -2,18 +2,18 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
-    <!-- Menu -->
+    <!-- 菜单 -->
     <sys:String x:Key="LOC_MediaAudit_MenuSection">媒体审计</sys:String>
     <sys:String x:Key="LOC_MediaAudit_Menu_ScanAll">扫描所有游戏媒体</sys:String>
     <sys:String x:Key="LOC_MediaAudit_Menu_ScanSelected">扫描所选游戏的媒体</sys:String>
 
-    <!-- Notifications -->
+    <!-- 通知 -->
     <sys:String x:Key="LOC_MediaAudit_Notification_NoSelection">媒体审计：未选择任何游戏。</sys:String>
     <sys:String x:Key="LOC_MediaAudit_Notification_NoIssues">媒体审计：未发现问题。</sys:String>
-    <sys:String x:Key="LOC_MediaAudit_Notification_IssuesFound">媒体审计：发现 {0} 个问题 ({1})。</sys:String>
-    <sys:String x:Key="LOC_MediaAudit_Notification_IssuesFoundDetail">媒体审计：发现 {0} 个问题 ({1})。请查看游戏标签了解详情。</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Notification_IssuesFound">媒体审计：发现 {0} 个问题（{1}）。</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Notification_IssuesFoundDetail">媒体审计：发现 {0} 个问题（{1}）。请检查游戏标签以获取详细信息。</sys:String>
 
-    <!-- Settings: Section Headers -->
+    <!-- 设置：分区标题 -->
     <sys:String x:Key="LOC_MediaAudit_Section_General">常规</sys:String>
     <sys:String x:Key="LOC_MediaAudit_Section_MediaTypes">要检查的媒体类型</sys:String>
     <sys:String x:Key="LOC_MediaAudit_Section_IconStandards">图标标准</sys:String>
@@ -23,14 +23,14 @@
     <sys:String x:Key="LOC_MediaAudit_Section_Videos">额外元数据 - 视频</sys:String>
     <sys:String x:Key="LOC_MediaAudit_Section_GameMusic">PlayniteSound - 游戏音乐</sys:String>
 
-    <!-- Settings: General -->
-    <sys:String x:Key="LOC_MediaAudit_Settings_BackgroundScanEnabled">启用定时后台扫描</sys:String>
+    <!-- 设置：常规 -->
+    <sys:String x:Key="LOC_MediaAudit_Settings_BackgroundScanEnabled">启用基于间隔的后台扫描</sys:String>
     <sys:String x:Key="LOC_MediaAudit_Settings_ScanInterval">扫描间隔（分钟）：</sys:String>
     <sys:String x:Key="LOC_MediaAudit_Settings_ReportMissing">报告缺失的媒体</sys:String>
     <sys:String x:Key="LOC_MediaAudit_Settings_ShowScanNotification">后台扫描后显示通知</sys:String>
     <sys:String x:Key="LOC_MediaAudit_Settings_TagUndesiredMedia">为有问题的游戏添加标签</sys:String>
 
-    <!-- Settings: Media Types -->
+    <!-- 设置：媒体类型 -->
     <sys:String x:Key="LOC_MediaAudit_Settings_CheckIcons">检查图标</sys:String>
     <sys:String x:Key="LOC_MediaAudit_Settings_CheckCovers">检查封面</sys:String>
     <sys:String x:Key="LOC_MediaAudit_Settings_CheckBackgrounds">检查背景</sys:String>
@@ -39,26 +39,25 @@
     <sys:String x:Key="LOC_MediaAudit_Settings_CheckMicrotrailers">检查微预告片</sys:String>
     <sys:String x:Key="LOC_MediaAudit_Settings_CheckGameMusic">检查游戏音乐</sys:String>
 
-    <!-- Settings: Common Labels -->
+    <!-- 设置：通用标签 -->
     <sys:String x:Key="LOC_MediaAudit_Settings_Preset">预设：</sys:String>
     <sys:String x:Key="LOC_MediaAudit_Settings_TagName">标签名称：</sys:String>
-    <sys:String x:Key="LOC_MediaAudit_Settings_MinSize">最小尺寸 (px)：</sys:String>
-    <sys:String x:Key="LOC_MediaAudit_Settings_MaxSize">最大尺寸 (px)：</sys:String>
-    <sys:String x:Key="LOC_MediaAudit_Settings_AspectRatioTolerance">宽高比容差：</sys:String>
-    <sys:String x:Key="LOC_MediaAudit_Settings_ExpectedAspectRatio">预期宽高比：</sys:String>
-    <sys:String x:Key="LOC_MediaAudit_Settings_MinWidth">最小宽度 (px)：</sys:String>
-    <sys:String x:Key="LOC_MediaAudit_Settings_MinHeight">最小高度 (px)：</sys:String>
     <sys:String x:Key="LOC_MediaAudit_Settings_InstalledOnly">仅已安装的游戏</sys:String>
 
-    <!-- Settings: Video-specific Labels -->
+    <!-- 设置：范围标签 -->
+    <sys:String x:Key="LOC_MediaAudit_Settings_AspectRatio">宽高比：</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_Width">宽度（像素，0 表示无限制）：</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_Height">高度（像素，0 表示无限制）：</sys:String>
+
+    <!-- 设置：视频专用标签 -->
     <sys:String x:Key="LOC_MediaAudit_Settings_TrailerInstalledOnly">预告片：仅已安装的游戏</sys:String>
     <sys:String x:Key="LOC_MediaAudit_Settings_TrailerTagName">预告片标签名称：</sys:String>
     <sys:String x:Key="LOC_MediaAudit_Settings_MicrotrailerInstalledOnly">微预告片：仅已安装的游戏</sys:String>
     <sys:String x:Key="LOC_MediaAudit_Settings_MicrotrailerTagName">微预告片标签名称：</sys:String>
 
-    <!-- Validation Errors -->
-    <sys:String x:Key="LOC_MediaAudit_Validation_ScanInterval">扫描间隔至少为 1 分钟。</sys:String>
-    <sys:String x:Key="LOC_MediaAudit_Validation_IconMinSize">图标最小尺寸至少为 1 像素。</sys:String>
-    <sys:String x:Key="LOC_MediaAudit_Validation_CoverMinDimensions">封面最小尺寸至少为 1 像素。</sys:String>
-    <sys:String x:Key="LOC_MediaAudit_Validation_BackgroundMinDimensions">背景最小尺寸至少为 1 像素。</sys:String>
+    <!-- 验证错误 -->
+    <sys:String x:Key="LOC_MediaAudit_Validation_ScanInterval">扫描间隔必须至少为 1 分钟。</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Validation_IconMinDimensions">图标最小宽度和高度必须至少为 1 像素。</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Validation_CoverMinDimensions">封面最小宽度和高度必须至少为 1 像素。</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Validation_BackgroundMinDimensions">背景最小宽度和高度必须至少为 1 像素。</sys:String>
 </ResourceDictionary>

@@ -74,21 +74,21 @@ namespace MediaAudit
             set { _tagIds = value ?? new Dictionary<MediaType, Guid>(); NotifyPropertyChanged(); }
         }
 
-        private string _iconTagName = "Undesired Icon";
+        private string _iconTagName = "[Media Audit] Undesired Icon";
         public string IconTagName
         {
             get => _iconTagName;
             set { _iconTagName = value; NotifyPropertyChanged(); }
         }
 
-        private string _coverTagName = "Undesired Cover";
+        private string _coverTagName = "[Media Audit] Undesired Cover";
         public string CoverTagName
         {
             get => _coverTagName;
             set { _coverTagName = value; NotifyPropertyChanged(); }
         }
 
-        private string _backgroundTagName = "Undesired Background";
+        private string _backgroundTagName = "[Media Audit] Undesired Background";
         public string BackgroundTagName
         {
             get => _backgroundTagName;
@@ -117,41 +117,62 @@ namespace MediaAudit
             set { _checkBackgrounds = value; NotifyPropertyChanged(); }
         }
 
-        // Icon standards (square, 1:1)
-        private int _iconMinSize = 64;
-        public int IconMinSize
+        // Icon standards (square, ~1:1)
+        private double _iconMinAspectRatio = 0.9;
+        public double IconMinAspectRatio
         {
-            get => _iconMinSize;
-            set { _iconMinSize = value; NotifyPropertyChanged(); }
+            get => _iconMinAspectRatio;
+            set { _iconMinAspectRatio = value; NotifyPropertyChanged(); }
         }
 
-        private int _iconMaxSize = 512;
-        public int IconMaxSize
+        private double _iconMaxAspectRatio = 1.1;
+        public double IconMaxAspectRatio
         {
-            get => _iconMaxSize;
-            set { _iconMaxSize = value; NotifyPropertyChanged(); }
+            get => _iconMaxAspectRatio;
+            set { _iconMaxAspectRatio = value; NotifyPropertyChanged(); }
         }
 
-        private double _iconAspectRatioTolerance = 0.1;
-        public double IconAspectRatioTolerance
+        private int _iconMinWidth = 64;
+        public int IconMinWidth
         {
-            get => _iconAspectRatioTolerance;
-            set { _iconAspectRatioTolerance = value; NotifyPropertyChanged(); }
+            get => _iconMinWidth;
+            set { _iconMinWidth = value; NotifyPropertyChanged(); }
+        }
+
+        private int _iconMaxWidth = 512;
+        public int IconMaxWidth
+        {
+            get => _iconMaxWidth;
+            set { _iconMaxWidth = value; NotifyPropertyChanged(); }
+        }
+
+        private int _iconMinHeight = 64;
+        public int IconMinHeight
+        {
+            get => _iconMinHeight;
+            set { _iconMinHeight = value; NotifyPropertyChanged(); }
+        }
+
+        private int _iconMaxHeight = 512;
+        public int IconMaxHeight
+        {
+            get => _iconMaxHeight;
+            set { _iconMaxHeight = value; NotifyPropertyChanged(); }
         }
 
         // Cover standards (portrait, ~2:3)
-        private double _coverAspectRatio = 0.667;
-        public double CoverAspectRatio
+        private double _coverMinAspectRatio = 0.5;
+        public double CoverMinAspectRatio
         {
-            get => _coverAspectRatio;
-            set { _coverAspectRatio = value; NotifyPropertyChanged(); }
+            get => _coverMinAspectRatio;
+            set { _coverMinAspectRatio = value; NotifyPropertyChanged(); }
         }
 
-        private double _coverAspectRatioTolerance = 0.15;
-        public double CoverAspectRatioTolerance
+        private double _coverMaxAspectRatio = 0.9;
+        public double CoverMaxAspectRatio
         {
-            get => _coverAspectRatioTolerance;
-            set { _coverAspectRatioTolerance = value; NotifyPropertyChanged(); }
+            get => _coverMaxAspectRatio;
+            set { _coverMaxAspectRatio = value; NotifyPropertyChanged(); }
         }
 
         private int _coverMinWidth = 300;
@@ -161,11 +182,25 @@ namespace MediaAudit
             set { _coverMinWidth = value; NotifyPropertyChanged(); }
         }
 
+        private int _coverMaxWidth = 0;
+        public int CoverMaxWidth
+        {
+            get => _coverMaxWidth;
+            set { _coverMaxWidth = value; NotifyPropertyChanged(); }
+        }
+
         private int _coverMinHeight = 400;
         public int CoverMinHeight
         {
             get => _coverMinHeight;
             set { _coverMinHeight = value; NotifyPropertyChanged(); }
+        }
+
+        private int _coverMaxHeight = 0;
+        public int CoverMaxHeight
+        {
+            get => _coverMaxHeight;
+            set { _coverMaxHeight = value; NotifyPropertyChanged(); }
         }
 
         // Extra Metadata - Logo
@@ -183,25 +218,25 @@ namespace MediaAudit
             set { _logoInstalledOnly = value; NotifyPropertyChanged(); }
         }
 
-        private string _logoTagName = "Undesired Logo";
+        private string _logoTagName = "[Media Audit] Undesired Logo";
         public string LogoTagName
         {
             get => _logoTagName;
             set { _logoTagName = value; NotifyPropertyChanged(); }
         }
 
-        private double _logoAspectRatio = 2.5;
-        public double LogoAspectRatio
+        private double _logoMinAspectRatio = 1.0;
+        public double LogoMinAspectRatio
         {
-            get => _logoAspectRatio;
-            set { _logoAspectRatio = value; NotifyPropertyChanged(); }
+            get => _logoMinAspectRatio;
+            set { _logoMinAspectRatio = value; NotifyPropertyChanged(); }
         }
 
-        private double _logoAspectRatioTolerance = 1.5;
-        public double LogoAspectRatioTolerance
+        private double _logoMaxAspectRatio = 4.0;
+        public double LogoMaxAspectRatio
         {
-            get => _logoAspectRatioTolerance;
-            set { _logoAspectRatioTolerance = value; NotifyPropertyChanged(); }
+            get => _logoMaxAspectRatio;
+            set { _logoMaxAspectRatio = value; NotifyPropertyChanged(); }
         }
 
         private int _logoMinWidth = 400;
@@ -211,11 +246,25 @@ namespace MediaAudit
             set { _logoMinWidth = value; NotifyPropertyChanged(); }
         }
 
+        private int _logoMaxWidth = 0;
+        public int LogoMaxWidth
+        {
+            get => _logoMaxWidth;
+            set { _logoMaxWidth = value; NotifyPropertyChanged(); }
+        }
+
         private int _logoMinHeight = 150;
         public int LogoMinHeight
         {
             get => _logoMinHeight;
             set { _logoMinHeight = value; NotifyPropertyChanged(); }
+        }
+
+        private int _logoMaxHeight = 0;
+        public int LogoMaxHeight
+        {
+            get => _logoMaxHeight;
+            set { _logoMaxHeight = value; NotifyPropertyChanged(); }
         }
 
         // Extra Metadata - Videos
@@ -233,7 +282,7 @@ namespace MediaAudit
             set { _trailerInstalledOnly = value; NotifyPropertyChanged(); }
         }
 
-        private string _trailerTagName = "Missing Trailer";
+        private string _trailerTagName = "[Media Audit] Missing Trailer";
         public string TrailerTagName
         {
             get => _trailerTagName;
@@ -254,7 +303,7 @@ namespace MediaAudit
             set { _microtrailerInstalledOnly = value; NotifyPropertyChanged(); }
         }
 
-        private string _microtrailerTagName = "Missing Microtrailer";
+        private string _microtrailerTagName = "[Media Audit] Missing Microtrailer";
         public string MicrotrailerTagName
         {
             get => _microtrailerTagName;
@@ -276,7 +325,7 @@ namespace MediaAudit
             set { _gameMusicInstalledOnly = value; NotifyPropertyChanged(); }
         }
 
-        private string _gameMusicTagName = "Missing Game Music";
+        private string _gameMusicTagName = "[Media Audit] Missing Game Music";
         public string GameMusicTagName
         {
             get => _gameMusicTagName;
@@ -284,18 +333,18 @@ namespace MediaAudit
         }
 
         // Background standards (landscape, ~16:9)
-        private double _backgroundAspectRatio = 1.778;
-        public double BackgroundAspectRatio
+        private double _backgroundMinAspectRatio = 1.3;
+        public double BackgroundMinAspectRatio
         {
-            get => _backgroundAspectRatio;
-            set { _backgroundAspectRatio = value; NotifyPropertyChanged(); }
+            get => _backgroundMinAspectRatio;
+            set { _backgroundMinAspectRatio = value; NotifyPropertyChanged(); }
         }
 
-        private double _backgroundAspectRatioTolerance = 0.3;
-        public double BackgroundAspectRatioTolerance
+        private double _backgroundMaxAspectRatio = 2.4;
+        public double BackgroundMaxAspectRatio
         {
-            get => _backgroundAspectRatioTolerance;
-            set { _backgroundAspectRatioTolerance = value; NotifyPropertyChanged(); }
+            get => _backgroundMaxAspectRatio;
+            set { _backgroundMaxAspectRatio = value; NotifyPropertyChanged(); }
         }
 
         private int _backgroundMinWidth = 1280;
@@ -305,11 +354,25 @@ namespace MediaAudit
             set { _backgroundMinWidth = value; NotifyPropertyChanged(); }
         }
 
+        private int _backgroundMaxWidth = 0;
+        public int BackgroundMaxWidth
+        {
+            get => _backgroundMaxWidth;
+            set { _backgroundMaxWidth = value; NotifyPropertyChanged(); }
+        }
+
         private int _backgroundMinHeight = 720;
         public int BackgroundMinHeight
         {
             get => _backgroundMinHeight;
             set { _backgroundMinHeight = value; NotifyPropertyChanged(); }
+        }
+
+        private int _backgroundMaxHeight = 0;
+        public int BackgroundMaxHeight
+        {
+            get => _backgroundMaxHeight;
+            set { _backgroundMaxHeight = value; NotifyPropertyChanged(); }
         }
 
         public MediaAuditSettings() { }
@@ -368,24 +431,33 @@ namespace MediaAudit
             CheckIcons = source.CheckIcons;
             CheckCovers = source.CheckCovers;
             CheckBackgrounds = source.CheckBackgrounds;
-            IconMinSize = source.IconMinSize;
-            IconMaxSize = source.IconMaxSize;
-            IconAspectRatioTolerance = source.IconAspectRatioTolerance;
-            CoverAspectRatio = source.CoverAspectRatio;
-            CoverAspectRatioTolerance = source.CoverAspectRatioTolerance;
+            IconMinAspectRatio = source.IconMinAspectRatio;
+            IconMaxAspectRatio = source.IconMaxAspectRatio;
+            IconMinWidth = source.IconMinWidth;
+            IconMaxWidth = source.IconMaxWidth;
+            IconMinHeight = source.IconMinHeight;
+            IconMaxHeight = source.IconMaxHeight;
+            CoverMinAspectRatio = source.CoverMinAspectRatio;
+            CoverMaxAspectRatio = source.CoverMaxAspectRatio;
             CoverMinWidth = source.CoverMinWidth;
+            CoverMaxWidth = source.CoverMaxWidth;
             CoverMinHeight = source.CoverMinHeight;
-            BackgroundAspectRatio = source.BackgroundAspectRatio;
-            BackgroundAspectRatioTolerance = source.BackgroundAspectRatioTolerance;
+            CoverMaxHeight = source.CoverMaxHeight;
+            BackgroundMinAspectRatio = source.BackgroundMinAspectRatio;
+            BackgroundMaxAspectRatio = source.BackgroundMaxAspectRatio;
             BackgroundMinWidth = source.BackgroundMinWidth;
+            BackgroundMaxWidth = source.BackgroundMaxWidth;
             BackgroundMinHeight = source.BackgroundMinHeight;
+            BackgroundMaxHeight = source.BackgroundMaxHeight;
             CheckLogos = source.CheckLogos;
             LogoInstalledOnly = source.LogoInstalledOnly;
             LogoTagName = source.LogoTagName;
-            LogoAspectRatio = source.LogoAspectRatio;
-            LogoAspectRatioTolerance = source.LogoAspectRatioTolerance;
+            LogoMinAspectRatio = source.LogoMinAspectRatio;
+            LogoMaxAspectRatio = source.LogoMaxAspectRatio;
             LogoMinWidth = source.LogoMinWidth;
+            LogoMaxWidth = source.LogoMaxWidth;
             LogoMinHeight = source.LogoMinHeight;
+            LogoMaxHeight = source.LogoMaxHeight;
             CheckTrailers = source.CheckTrailers;
             TrailerInstalledOnly = source.TrailerInstalledOnly;
             TrailerTagName = source.TrailerTagName;
@@ -443,12 +515,20 @@ namespace MediaAudit
             errors = new List<string>();
             if (BackgroundScanEnabled && ScanIntervalMinutes < 1)
                 errors.Add(ResourceProvider.GetString("LOC_MediaAudit_Validation_ScanInterval"));
-            if (IconMinSize < 1)
-                errors.Add(ResourceProvider.GetString("LOC_MediaAudit_Validation_IconMinSize"));
+            if (IconMinWidth < 1 || IconMinHeight < 1)
+                errors.Add(ResourceProvider.GetString("LOC_MediaAudit_Validation_IconMinDimensions"));
             if (CoverMinWidth < 1 || CoverMinHeight < 1)
                 errors.Add(ResourceProvider.GetString("LOC_MediaAudit_Validation_CoverMinDimensions"));
             if (BackgroundMinWidth < 1 || BackgroundMinHeight < 1)
                 errors.Add(ResourceProvider.GetString("LOC_MediaAudit_Validation_BackgroundMinDimensions"));
+            if (IconMinAspectRatio > IconMaxAspectRatio)
+                errors.Add("Icon: Min aspect ratio cannot exceed max aspect ratio.");
+            if (CoverMinAspectRatio > CoverMaxAspectRatio)
+                errors.Add("Cover: Min aspect ratio cannot exceed max aspect ratio.");
+            if (LogoMinAspectRatio > LogoMaxAspectRatio)
+                errors.Add("Logo: Min aspect ratio cannot exceed max aspect ratio.");
+            if (BackgroundMinAspectRatio > BackgroundMaxAspectRatio)
+                errors.Add("Background: Min aspect ratio cannot exceed max aspect ratio.");
             return errors.Count == 0;
         }
     }

@@ -1,10 +1,12 @@
-Id: MediaAudit_2e6b5e8ac42d4e5b
-Name: Media Audit
-Author: sharkusmanch
-Version: 1.1.0
+Id: MediaAudit_2e6b5e8ac42d4e5b_Fixed by ERROR0cai
+Name: Media Audit_Fixed by ERROR0cai
+Author: ERROR0cai (based on sharkusmanch's Media Audit)
+Version: 1.1.0.233
 Module: MediaAudit.dll
 Icon: icon.png
 Type: GenericPlugin
 Links:
-  - Name: GitHub
+  - Name: Fixed version (GitHub)
+    Url: https://github.com/ERROR0cai/playnite-media-audit
+  - Name: Original (GitHub)
     Url: https://github.com/sharkusmanch/playnite-media-audit
