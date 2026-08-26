@@ -15,11 +15,11 @@ namespace MediaAudit
         private class MediaPreset
         {
             public string Name { get; set; }
-            public double AspectRatio { get; set; }
-            public double Tolerance { get; set; }
+            public double MinAspectRatio { get; set; }
+            public double MaxAspectRatio { get; set; }
             public int MinWidth { get; set; }
-            public int MinHeight { get; set; }
             public int MaxWidth { get; set; }
+            public int MinHeight { get; set; }
             public int MaxHeight { get; set; }
 
             public override string ToString() => Name;
@@ -27,43 +27,43 @@ namespace MediaAudit
 
         private static readonly List<MediaPreset> IconPresets = new List<MediaPreset>
         {
-            new MediaPreset { Name = "Square 1:1 (default)",   AspectRatio = 1.0, Tolerance = 0.1, MinWidth = 64,  MinHeight = 64,  MaxWidth = 512,  MaxHeight = 512 },
-            new MediaPreset { Name = "Square 1:1 (large)",     AspectRatio = 1.0, Tolerance = 0.1, MinWidth = 128, MinHeight = 128, MaxWidth = 1024, MaxHeight = 1024 },
-            new MediaPreset { Name = "ICO standard",           AspectRatio = 1.0, Tolerance = 0.1, MinWidth = 256, MinHeight = 256, MaxWidth = 256,  MaxHeight = 256 },
-            new MediaPreset { Name = "Square 1:1 (any size)",  AspectRatio = 1.0, Tolerance = 0.1, MinWidth = 16,  MinHeight = 16,  MaxWidth = 0,    MaxHeight = 0 },
+            new MediaPreset { Name = "Square 1:1 (default)",   MinAspectRatio = 0.9, MaxAspectRatio = 1.1, MinWidth = 64,  MaxWidth = 512,  MinHeight = 64,  MaxHeight = 512 },
+            new MediaPreset { Name = "Square 1:1 (large)",     MinAspectRatio = 0.9, MaxAspectRatio = 1.1, MinWidth = 128, MaxWidth = 1024, MinHeight = 128, MaxHeight = 1024 },
+            new MediaPreset { Name = "ICO standard",           MinAspectRatio = 0.9, MaxAspectRatio = 1.1, MinWidth = 256, MaxWidth = 256,  MinHeight = 256, MaxHeight = 256 },
+            new MediaPreset { Name = "Square 1:1 (any size)",  MinAspectRatio = 0.9, MaxAspectRatio = 1.1, MinWidth = 16,  MaxWidth = 0,    MinHeight = 16,  MaxHeight = 0 },
         };
 
         private static readonly List<MediaPreset> CoverPresets = new List<MediaPreset>
         {
-            new MediaPreset { Name = "Steam (2:3)",            AspectRatio = 0.667, Tolerance = 0.1,  MinWidth = 300, MinHeight = 450 },
-            new MediaPreset { Name = "Epic Games (2:3 HD)",    AspectRatio = 0.667, Tolerance = 0.1,  MinWidth = 600, MinHeight = 900 },
-            new MediaPreset { Name = "GOG (27:38)",            AspectRatio = 0.71,  Tolerance = 0.1,  MinWidth = 342, MinHeight = 482 },
-            new MediaPreset { Name = "IGDB (3:4)",             AspectRatio = 0.75,  Tolerance = 0.1,  MinWidth = 264, MinHeight = 352 },
-            new MediaPreset { Name = "Portrait (3:4)",         AspectRatio = 0.75,  Tolerance = 0.1,  MinWidth = 300, MinHeight = 400 },
-            new MediaPreset { Name = "Tall portrait (9:16)",   AspectRatio = 0.5625, Tolerance = 0.1, MinWidth = 360, MinHeight = 640 },
-            new MediaPreset { Name = "Any portrait",           AspectRatio = 0.7,   Tolerance = 0.2,  MinWidth = 200, MinHeight = 280 },
-            new MediaPreset { Name = "Steam header (46:21)",   AspectRatio = 2.19,  Tolerance = 0.15, MinWidth = 460, MinHeight = 215 },
-            new MediaPreset { Name = "Square (1:1)",           AspectRatio = 1.0,   Tolerance = 0.1,  MinWidth = 300, MinHeight = 300 },
+            new MediaPreset { Name = "Steam (2:3)",            MinAspectRatio = 0.6, MaxAspectRatio = 0.75, MinWidth = 300, MaxWidth = 0, MinHeight = 450, MaxHeight = 0 },
+            new MediaPreset { Name = "Epic Games (2:3 HD)",    MinAspectRatio = 0.6, MaxAspectRatio = 0.75, MinWidth = 600, MaxWidth = 0, MinHeight = 900, MaxHeight = 0 },
+            new MediaPreset { Name = "GOG (27:38)",            MinAspectRatio = 0.65, MaxAspectRatio = 0.77, MinWidth = 342, MaxWidth = 0, MinHeight = 482, MaxHeight = 0 },
+            new MediaPreset { Name = "IGDB (3:4)",             MinAspectRatio = 0.7, MaxAspectRatio = 0.8, MinWidth = 264, MaxWidth = 0, MinHeight = 352, MaxHeight = 0 },
+            new MediaPreset { Name = "Portrait (3:4)",         MinAspectRatio = 0.7, MaxAspectRatio = 0.8, MinWidth = 300, MaxWidth = 0, MinHeight = 400, MaxHeight = 0 },
+            new MediaPreset { Name = "Tall portrait (9:16)",   MinAspectRatio = 0.5, MaxAspectRatio = 0.6, MinWidth = 360, MaxWidth = 0, MinHeight = 640, MaxHeight = 0 },
+            new MediaPreset { Name = "Any portrait",           MinAspectRatio = 0.5, MaxAspectRatio = 0.9, MinWidth = 200, MaxWidth = 0, MinHeight = 280, MaxHeight = 0 },
+            new MediaPreset { Name = "Steam header (46:21)",   MinAspectRatio = 2.0, MaxAspectRatio = 2.4, MinWidth = 460, MaxWidth = 0, MinHeight = 215, MaxHeight = 0 },
+            new MediaPreset { Name = "Square (1:1)",           MinAspectRatio = 0.9, MaxAspectRatio = 1.1, MinWidth = 300, MaxWidth = 0, MinHeight = 300, MaxHeight = 0 },
         };
 
         private static readonly List<MediaPreset> LogoPresets = new List<MediaPreset>
         {
-            new MediaPreset { Name = "Wide logo (default)",    AspectRatio = 2.5, Tolerance = 1.5, MinWidth = 400, MinHeight = 150 },
-            new MediaPreset { Name = "SteamGridDB",            AspectRatio = 2.5, Tolerance = 1.5, MinWidth = 500, MinHeight = 200 },
-            new MediaPreset { Name = "Steam logo (strict)",    AspectRatio = 2.5, Tolerance = 0.5, MinWidth = 600, MinHeight = 240 },
-            new MediaPreset { Name = "Any logo",               AspectRatio = 2.5, Tolerance = 2.0, MinWidth = 200, MinHeight = 80 },
+            new MediaPreset { Name = "Wide logo (default)",    MinAspectRatio = 1.0, MaxAspectRatio = 4.0, MinWidth = 400, MaxWidth = 0, MinHeight = 150, MaxHeight = 0 },
+            new MediaPreset { Name = "SteamGridDB",            MinAspectRatio = 1.0, MaxAspectRatio = 4.0, MinWidth = 500, MaxWidth = 0, MinHeight = 200, MaxHeight = 0 },
+            new MediaPreset { Name = "Steam logo (strict)",    MinAspectRatio = 1.8, MaxAspectRatio = 3.2, MinWidth = 600, MaxWidth = 0, MinHeight = 240, MaxHeight = 0 },
+            new MediaPreset { Name = "Any logo",               MinAspectRatio = 0.5, MaxAspectRatio = 5.0, MinWidth = 200, MaxWidth = 0, MinHeight = 80, MaxHeight = 0 },
         };
 
         private static readonly List<MediaPreset> BackgroundPresets = new List<MediaPreset>
         {
-            new MediaPreset { Name = "16:9 720p",              AspectRatio = 1.778, Tolerance = 0.15, MinWidth = 1280, MinHeight = 720 },
-            new MediaPreset { Name = "16:9 1080p",             AspectRatio = 1.778, Tolerance = 0.15, MinWidth = 1920, MinHeight = 1080 },
-            new MediaPreset { Name = "16:9 1440p",             AspectRatio = 1.778, Tolerance = 0.15, MinWidth = 2560, MinHeight = 1440 },
-            new MediaPreset { Name = "16:9 4K",                AspectRatio = 1.778, Tolerance = 0.15, MinWidth = 3840, MinHeight = 2160 },
-            new MediaPreset { Name = "16:10",                  AspectRatio = 1.6,   Tolerance = 0.15, MinWidth = 1920, MinHeight = 1200 },
-            new MediaPreset { Name = "21:9 Ultrawide",         AspectRatio = 2.333, Tolerance = 0.15, MinWidth = 2560, MinHeight = 1080 },
-            new MediaPreset { Name = "Steam Hero (32:15)",     AspectRatio = 2.133, Tolerance = 0.15, MinWidth = 3200, MinHeight = 1500 },
-            new MediaPreset { Name = "Any landscape",          AspectRatio = 1.6,   Tolerance = 0.5,  MinWidth = 1280, MinHeight = 720 },
+            new MediaPreset { Name = "16:9 720p",              MinAspectRatio = 1.6, MaxAspectRatio = 1.9, MinWidth = 1280, MaxWidth = 0, MinHeight = 720, MaxHeight = 0 },
+            new MediaPreset { Name = "16:9 1080p",             MinAspectRatio = 1.6, MaxAspectRatio = 1.9, MinWidth = 1920, MaxWidth = 0, MinHeight = 1080, MaxHeight = 0 },
+            new MediaPreset { Name = "16:9 1440p",             MinAspectRatio = 1.6, MaxAspectRatio = 1.9, MinWidth = 2560, MaxWidth = 0, MinHeight = 1440, MaxHeight = 0 },
+            new MediaPreset { Name = "16:9 4K",                MinAspectRatio = 1.6, MaxAspectRatio = 1.9, MinWidth = 3840, MaxWidth = 0, MinHeight = 2160, MaxHeight = 0 },
+            new MediaPreset { Name = "16:10",                  MinAspectRatio = 1.5, MaxAspectRatio = 1.7, MinWidth = 1920, MaxWidth = 0, MinHeight = 1200, MaxHeight = 0 },
+            new MediaPreset { Name = "21:9 Ultrawide",         MinAspectRatio = 2.1, MaxAspectRatio = 2.5, MinWidth = 2560, MaxWidth = 0, MinHeight = 1080, MaxHeight = 0 },
+            new MediaPreset { Name = "Steam Hero (32:15)",     MinAspectRatio = 2.0, MaxAspectRatio = 2.3, MinWidth = 3200, MaxWidth = 0, MinHeight = 1500, MaxHeight = 0 },
+            new MediaPreset { Name = "Any landscape",          MinAspectRatio = 1.1, MaxAspectRatio = 2.6, MinWidth = 1280, MaxWidth = 0, MinHeight = 720, MaxHeight = 0 },
         };
 
         public MediaAuditSettingsView()
@@ -89,89 +89,72 @@ namespace MediaAudit
 
             AddSection(mainStack, Loc("LOC_MediaAudit_Section_IconStandards"), stack =>
             {
-                AddPresetDropdown(stack, Loc("LOC_MediaAudit_Settings_Preset"), IconPresets, s =>
+                AddPresetDropdown(stack, Loc("LOC_MediaAudit_Settings_Preset"), IconPresets, (s, p) =>
                 {
-                    s.IconAspectRatioTolerance = 0;
-                    s.IconMinSize = 0;
-                    s.IconMaxSize = 0;
-                }, (s, p) =>
-                {
-                    s.IconAspectRatioTolerance = p.Tolerance;
-                    s.IconMinSize = p.MinWidth;
-                    s.IconMaxSize = p.MaxWidth;
+                    s.IconMinAspectRatio = p.MinAspectRatio;
+                    s.IconMaxAspectRatio = p.MaxAspectRatio;
+                    s.IconMinWidth = p.MinWidth;
+                    s.IconMaxWidth = p.MaxWidth;
+                    s.IconMinHeight = p.MinHeight;
+                    s.IconMaxHeight = p.MaxHeight;
                 });
                 AddTextField(stack, Loc("LOC_MediaAudit_Settings_TagName"), "IconTagName");
-                AddNumericField(stack, Loc("LOC_MediaAudit_Settings_MinSize"), "IconMinSize");
-                AddNumericField(stack, Loc("LOC_MediaAudit_Settings_MaxSize"), "IconMaxSize");
-                AddNumericField(stack, Loc("LOC_MediaAudit_Settings_AspectRatioTolerance"), "IconAspectRatioTolerance");
+                AddRangeField(stack, Loc("LOC_MediaAudit_Settings_AspectRatio"), "IconMinAspectRatio", "IconMaxAspectRatio");
+                AddRangeField(stack, Loc("LOC_MediaAudit_Settings_Width"), "IconMinWidth", "IconMaxWidth");
+                AddRangeField(stack, Loc("LOC_MediaAudit_Settings_Height"), "IconMinHeight", "IconMaxHeight");
             });
 
             AddSection(mainStack, Loc("LOC_MediaAudit_Section_CoverStandards"), stack =>
             {
-                AddPresetDropdown(stack, Loc("LOC_MediaAudit_Settings_Preset"), CoverPresets, s =>
+                AddPresetDropdown(stack, Loc("LOC_MediaAudit_Settings_Preset"), CoverPresets, (s, p) =>
                 {
-                    s.CoverAspectRatio = 0;
-                    s.CoverAspectRatioTolerance = 0;
-                    s.CoverMinWidth = 0;
-                    s.CoverMinHeight = 0;
-                }, (s, p) =>
-                {
-                    s.CoverAspectRatio = p.AspectRatio;
-                    s.CoverAspectRatioTolerance = p.Tolerance;
+                    s.CoverMinAspectRatio = p.MinAspectRatio;
+                    s.CoverMaxAspectRatio = p.MaxAspectRatio;
                     s.CoverMinWidth = p.MinWidth;
+                    s.CoverMaxWidth = p.MaxWidth;
                     s.CoverMinHeight = p.MinHeight;
+                    s.CoverMaxHeight = p.MaxHeight;
                 });
                 AddTextField(stack, Loc("LOC_MediaAudit_Settings_TagName"), "CoverTagName");
-                AddNumericField(stack, Loc("LOC_MediaAudit_Settings_ExpectedAspectRatio"), "CoverAspectRatio");
-                AddNumericField(stack, Loc("LOC_MediaAudit_Settings_AspectRatioTolerance"), "CoverAspectRatioTolerance");
-                AddNumericField(stack, Loc("LOC_MediaAudit_Settings_MinWidth"), "CoverMinWidth");
-                AddNumericField(stack, Loc("LOC_MediaAudit_Settings_MinHeight"), "CoverMinHeight");
+                AddRangeField(stack, Loc("LOC_MediaAudit_Settings_AspectRatio"), "CoverMinAspectRatio", "CoverMaxAspectRatio");
+                AddRangeField(stack, Loc("LOC_MediaAudit_Settings_Width"), "CoverMinWidth", "CoverMaxWidth");
+                AddRangeField(stack, Loc("LOC_MediaAudit_Settings_Height"), "CoverMinHeight", "CoverMaxHeight");
             });
 
             AddSection(mainStack, Loc("LOC_MediaAudit_Section_BackgroundStandards"), stack =>
             {
-                AddPresetDropdown(stack, Loc("LOC_MediaAudit_Settings_Preset"), BackgroundPresets, s =>
+                AddPresetDropdown(stack, Loc("LOC_MediaAudit_Settings_Preset"), BackgroundPresets, (s, p) =>
                 {
-                    s.BackgroundAspectRatio = 0;
-                    s.BackgroundAspectRatioTolerance = 0;
-                    s.BackgroundMinWidth = 0;
-                    s.BackgroundMinHeight = 0;
-                }, (s, p) =>
-                {
-                    s.BackgroundAspectRatio = p.AspectRatio;
-                    s.BackgroundAspectRatioTolerance = p.Tolerance;
+                    s.BackgroundMinAspectRatio = p.MinAspectRatio;
+                    s.BackgroundMaxAspectRatio = p.MaxAspectRatio;
                     s.BackgroundMinWidth = p.MinWidth;
+                    s.BackgroundMaxWidth = p.MaxWidth;
                     s.BackgroundMinHeight = p.MinHeight;
+                    s.BackgroundMaxHeight = p.MaxHeight;
                 });
                 AddTextField(stack, Loc("LOC_MediaAudit_Settings_TagName"), "BackgroundTagName");
-                AddNumericField(stack, Loc("LOC_MediaAudit_Settings_ExpectedAspectRatio"), "BackgroundAspectRatio");
-                AddNumericField(stack, Loc("LOC_MediaAudit_Settings_AspectRatioTolerance"), "BackgroundAspectRatioTolerance");
-                AddNumericField(stack, Loc("LOC_MediaAudit_Settings_MinWidth"), "BackgroundMinWidth");
-                AddNumericField(stack, Loc("LOC_MediaAudit_Settings_MinHeight"), "BackgroundMinHeight");
+                AddRangeField(stack, Loc("LOC_MediaAudit_Settings_AspectRatio"), "BackgroundMinAspectRatio", "BackgroundMaxAspectRatio");
+                AddRangeField(stack, Loc("LOC_MediaAudit_Settings_Width"), "BackgroundMinWidth", "BackgroundMaxWidth");
+                AddRangeField(stack, Loc("LOC_MediaAudit_Settings_Height"), "BackgroundMinHeight", "BackgroundMaxHeight");
             });
 
             AddSection(mainStack, Loc("LOC_MediaAudit_Section_Logo"), stack =>
             {
                 AddCheckbox(stack, Loc("LOC_MediaAudit_Settings_CheckLogos"), "CheckLogos");
                 AddCheckbox(stack, Loc("LOC_MediaAudit_Settings_InstalledOnly"), "LogoInstalledOnly");
-                AddPresetDropdown(stack, Loc("LOC_MediaAudit_Settings_Preset"), LogoPresets, s =>
+                AddPresetDropdown(stack, Loc("LOC_MediaAudit_Settings_Preset"), LogoPresets, (s, p) =>
                 {
-                    s.LogoAspectRatio = 0;
-                    s.LogoAspectRatioTolerance = 0;
-                    s.LogoMinWidth = 0;
-                    s.LogoMinHeight = 0;
-                }, (s, p) =>
-                {
-                    s.LogoAspectRatio = p.AspectRatio;
-                    s.LogoAspectRatioTolerance = p.Tolerance;
+                    s.LogoMinAspectRatio = p.MinAspectRatio;
+                    s.LogoMaxAspectRatio = p.MaxAspectRatio;
                     s.LogoMinWidth = p.MinWidth;
+                    s.LogoMaxWidth = p.MaxWidth;
                     s.LogoMinHeight = p.MinHeight;
+                    s.LogoMaxHeight = p.MaxHeight;
                 });
                 AddTextField(stack, Loc("LOC_MediaAudit_Settings_TagName"), "LogoTagName");
-                AddNumericField(stack, Loc("LOC_MediaAudit_Settings_ExpectedAspectRatio"), "LogoAspectRatio");
-                AddNumericField(stack, Loc("LOC_MediaAudit_Settings_AspectRatioTolerance"), "LogoAspectRatioTolerance");
-                AddNumericField(stack, Loc("LOC_MediaAudit_Settings_MinWidth"), "LogoMinWidth");
-                AddNumericField(stack, Loc("LOC_MediaAudit_Settings_MinHeight"), "LogoMinHeight");
+                AddRangeField(stack, Loc("LOC_MediaAudit_Settings_AspectRatio"), "LogoMinAspectRatio", "LogoMaxAspectRatio");
+                AddRangeField(stack, Loc("LOC_MediaAudit_Settings_Width"), "LogoMinWidth", "LogoMaxWidth");
+                AddRangeField(stack, Loc("LOC_MediaAudit_Settings_Height"), "LogoMinHeight", "LogoMaxHeight");
             });
 
             AddSection(mainStack, Loc("LOC_MediaAudit_Section_Videos"), stack =>
@@ -201,21 +184,22 @@ namespace MediaAudit
         private static string Loc(string key) => ResourceProvider.GetString(key);
 
         private void AddPresetDropdown(StackPanel parent, string label, List<MediaPreset> presets,
-            Action<MediaAuditSettings> clear, Action<MediaAuditSettings, MediaPreset> apply)
+            Action<MediaAuditSettings, MediaPreset> apply)
         {
-            var panel = new DockPanel { Margin = new Thickness(0, 5, 0, 5) };
+            var panel = new StackPanel { Orientation = Orientation.Horizontal, Margin = new Thickness(0, 5, 0, 5) };
             panel.Children.Add(new TextBlock
             {
                 Text = label,
-                Width = 180,
-                VerticalAlignment = VerticalAlignment.Center
+                VerticalAlignment = VerticalAlignment.Center,
+                Margin = new Thickness(0, 0, 5, 0)
             });
 
             var combo = new ComboBox
             {
                 Width = 200,
                 ItemsSource = presets,
-                IsEditable = false
+                IsEditable = false,
+                VerticalAlignment = VerticalAlignment.Center
             };
 
             combo.SelectionChanged += (s, e) =>
@@ -225,7 +209,6 @@ namespace MediaAudit
                 if (preset == null || settings == null)
                     return;
 
-                clear(settings);
                 apply(settings, preset);
             };
 
@@ -259,14 +242,14 @@ namespace MediaAudit
 
         private static void AddTextField(StackPanel parent, string label, string binding)
         {
-            var panel = new DockPanel { Margin = new Thickness(0, 5, 0, 0) };
+            var panel = new StackPanel { Orientation = Orientation.Horizontal, Margin = new Thickness(0, 5, 0, 0) };
             panel.Children.Add(new TextBlock
             {
                 Text = label,
-                Width = 180,
-                VerticalAlignment = VerticalAlignment.Center
+                VerticalAlignment = VerticalAlignment.Center,
+                Margin = new Thickness(0, 0, 5, 0)
             });
-            var tb = new TextBox { Width = 200 };
+            var tb = new TextBox { Width = 300, VerticalAlignment = VerticalAlignment.Center };
             tb.SetBinding(TextBox.TextProperty, new Binding(binding)
             {
                 UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
@@ -277,19 +260,53 @@ namespace MediaAudit
 
         private static void AddNumericField(StackPanel parent, string label, string binding)
         {
-            var panel = new DockPanel { Margin = new Thickness(0, 5, 0, 0) };
+            var panel = new StackPanel { Orientation = Orientation.Horizontal, Margin = new Thickness(0, 5, 0, 0) };
             panel.Children.Add(new TextBlock
             {
                 Text = label,
-                Width = 180,
-                VerticalAlignment = VerticalAlignment.Center
+                VerticalAlignment = VerticalAlignment.Center,
+                Margin = new Thickness(0, 0, 5, 0)
             });
-            var tb = new TextBox { Width = 100 };
+            var tb = new TextBox { Width = 100, VerticalAlignment = VerticalAlignment.Center };
             tb.SetBinding(TextBox.TextProperty, new Binding(binding)
             {
                 UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
             });
             panel.Children.Add(tb);
+            parent.Children.Add(panel);
+        }
+
+        private static void AddRangeField(StackPanel parent, string label, string minBinding, string maxBinding)
+        {
+            var panel = new StackPanel { Orientation = Orientation.Horizontal, Margin = new Thickness(0, 5, 0, 0) };
+            panel.Children.Add(new TextBlock
+            {
+                Text = label,
+                VerticalAlignment = VerticalAlignment.Center,
+                Margin = new Thickness(0, 0, 5, 0)
+            });
+
+            var minBox = new TextBox { Width = 80, VerticalAlignment = VerticalAlignment.Center };
+            minBox.SetBinding(TextBox.TextProperty, new Binding(minBinding)
+            {
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
+            });
+            panel.Children.Add(minBox);
+
+            panel.Children.Add(new TextBlock
+            {
+                Text = " ~ ",
+                VerticalAlignment = VerticalAlignment.Center,
+                Margin = new Thickness(2, 0, 2, 0)
+            });
+
+            var maxBox = new TextBox { Width = 80, VerticalAlignment = VerticalAlignment.Center };
+            maxBox.SetBinding(TextBox.TextProperty, new Binding(maxBinding)
+            {
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
+            });
+            panel.Children.Add(maxBox);
+
             parent.Children.Add(panel);
         }
     }

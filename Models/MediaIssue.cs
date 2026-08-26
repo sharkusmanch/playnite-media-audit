@@ -19,7 +19,8 @@ namespace MediaAudit
         Missing,
         BadAspectRatio,
         LowResolution,
-        HighResolution
+        HighResolution,
+        OutOfRange
     }
 
     public class MediaIssue
@@ -89,11 +90,11 @@ namespace MediaAudit
 
     public class MediaStandards
     {
-        public double ExpectedAspectRatio { get; set; }
-        public double AspectRatioTolerance { get; set; }
+        public double MinAspectRatio { get; set; }
+        public double MaxAspectRatio { get; set; }
         public int MinWidth { get; set; }
-        public int MinHeight { get; set; }
         public int MaxWidth { get; set; }
+        public int MinHeight { get; set; }
         public int MaxHeight { get; set; }
     }
 }

@@ -1,3 +1,9 @@
+Based on Sharkusmanch's [Media Audit](https://github.com/sharkusmanch/playnite-media-audit), I added the `[Media Audit]` prefix to the tag name, modified the UI placement, and standardized the image specifications to a range of aspect ratios, width, and height.
+
+基于sharkusmanch的[Media Audit](https://github.com/sharkusmanch/playnite-media-audit)，给标签名称加上了`[Media Audit] `前缀，修改了UI位置，将图片标准统一为宽高比、宽度和高度的范围
+
+<img width="631" height="1092" alt="image" src="https://github.com/user-attachments/assets/0e2432fc-d86c-4504-8974-806b099c7447" />
+
 # Media Audit
 
 A Playnite extension that scans your game library for missing or non-conforming media (covers, icons, backgrounds, logos, trailers) and tags affected games.

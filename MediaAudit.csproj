@@ -40,4 +40,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+
+  <!-- ====== Toolbox 自动打包 ====== -->
+  <Target Name="ToolboxPack" AfterTargets="Build">
+    <Exec Command="&quot;%LOCALAPPDATA%\Playnite\Toolbox.exe&quot; pack $(ProjectDir)$(OutDir) $(ProjectDir)bin" />
+  </Target>
 </Project>

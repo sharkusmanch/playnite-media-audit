@@ -42,13 +42,12 @@
     <!-- Settings: Common Labels -->
     <sys:String x:Key="LOC_MediaAudit_Settings_Preset">Preset:</sys:String>
     <sys:String x:Key="LOC_MediaAudit_Settings_TagName">Tag name:</sys:String>
-    <sys:String x:Key="LOC_MediaAudit_Settings_MinSize">Min size (px):</sys:String>
-    <sys:String x:Key="LOC_MediaAudit_Settings_MaxSize">Max size (px):</sys:String>
-    <sys:String x:Key="LOC_MediaAudit_Settings_AspectRatioTolerance">Aspect ratio tolerance:</sys:String>
-    <sys:String x:Key="LOC_MediaAudit_Settings_ExpectedAspectRatio">Expected aspect ratio:</sys:String>
-    <sys:String x:Key="LOC_MediaAudit_Settings_MinWidth">Min width (px):</sys:String>
-    <sys:String x:Key="LOC_MediaAudit_Settings_MinHeight">Min height (px):</sys:String>
     <sys:String x:Key="LOC_MediaAudit_Settings_InstalledOnly">Installed games only</sys:String>
+
+    <!-- Settings: Range Labels -->
+    <sys:String x:Key="LOC_MediaAudit_Settings_AspectRatio">Aspect ratio:</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_Width">Width (px, 0 = unlimited):</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Settings_Height">Height (px, 0 = unlimited):</sys:String>
 
     <!-- Settings: Video-specific Labels -->
     <sys:String x:Key="LOC_MediaAudit_Settings_TrailerInstalledOnly">Trailers: installed games only</sys:String>
@@ -58,7 +57,7 @@
 
     <!-- Validation Errors -->
     <sys:String x:Key="LOC_MediaAudit_Validation_ScanInterval">Scan interval must be at least 1 minute.</sys:String>
-    <sys:String x:Key="LOC_MediaAudit_Validation_IconMinSize">Icon minimum size must be at least 1 pixel.</sys:String>
-    <sys:String x:Key="LOC_MediaAudit_Validation_CoverMinDimensions">Cover minimum dimensions must be at least 1 pixel.</sys:String>
-    <sys:String x:Key="LOC_MediaAudit_Validation_BackgroundMinDimensions">Background minimum dimensions must be at least 1 pixel.</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Validation_IconMinDimensions">Icon minimum width and height must be at least 1 pixel.</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Validation_CoverMinDimensions">Cover minimum width and height must be at least 1 pixel.</sys:String>
+    <sys:String x:Key="LOC_MediaAudit_Validation_BackgroundMinDimensions">Background minimum width and height must be at least 1 pixel.</sys:String>
 </ResourceDictionary>
